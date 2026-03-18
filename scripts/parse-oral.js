@@ -32,35 +32,31 @@ function parseFile(filePath) {
   const content = fs.readFileSync(filePath, "utf-8");
   const lines = content.split(/\r?\n/);
   const questions = [];
-  let currentQ = null;
   let qCounter = 0;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
-    // Match question line: X-XXX. question text
     const qMatch = line.match(/^(\d+-\d+)\.\s+(.+)/);
     if (qMatch) {
       const qId = qMatch[1];
       const qText = qMatch[2];
 
-      // Look for answer on next line(s): X-XXX : answer text
       let answer = "";
       for (let j = i + 1; j < lines.length; j++) {
         const nextLine = lines[j].trim();
         const aMatch = nextLine.match(/^(\d+-\d+)\s*:\s*(.+)/);
         if (aMatch && aMatch[1] === qId) {
           answer = aMatch[2];
-          // Collect continuation lines (lines that don't match new question or answer patterns)
           for (let k = j + 1; k < lines.length; k++) {
             const contLine = lines[k].trim();
-            if (!contLine || contLine.startsWith("=") || contLine.match(/^\d+-\d+\./) || contLine.match(/^Part\s/) || contLine.startsWith("※") || contLine.startsWith("END")) break;
+            if (!contLine || contLine.startsWith("=") || contLine.startsWith("━") || contLine.match(/^\d+-\d+\./) || contLine.match(/^Part\s/) || contLine.startsWith("※") || contLine.startsWith("END")) break;
             if (contLine.match(/^\d+-\d+\s*:/)) break;
             answer += "\n" + contLine;
           }
           break;
         }
-        if (nextLine === "" || nextLine.startsWith("=")) continue;
+        if (nextLine === "" || nextLine.startsWith("=") || nextLine.startsWith("━")) continue;
         break;
       }
 
@@ -78,6 +74,89 @@ function parseFile(filePath) {
   return questions;
 }
 
+// Extract common sections from bodybuilding file
+function extractCommonSections(filePath) {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const lines = content.split(/\r?\n/);
+
+  // Find Part boundaries
+  const parts = [];
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].trim().match(/^Part\s+(\d+)\.\s+(.+)/);
+    if (match) {
+      parts.push({ partNum: parseInt(match[1]), title: match[2], startLine: i });
+    }
+  }
+
+  // Set end lines
+  for (let i = 0; i < parts.length; i++) {
+    parts[i].endLine = i + 1 < parts.length ? parts[i + 1].startLine : lines.length;
+  }
+
+  const commonSections = {
+    firstAid: [],  // Part 1: 응급처치
+    doping: [],    // Part 5: 도핑 questions (5-090 ~ 5-146)
+    humanRights: [], // Part 6: 스포츠 인권
+  };
+
+  // Part 1: 응급처치 - all questions
+  const part1 = parts.find(p => p.title.includes("응급처치"));
+  if (part1) {
+    const section = lines.slice(part1.startLine, part1.endLine).join("\n");
+    const tmpFile = filePath + ".tmp_part1";
+    fs.writeFileSync(tmpFile, section);
+    commonSections.firstAid = parseFile(tmpFile);
+    fs.unlinkSync(tmpFile);
+    // Prefix questions
+    commonSections.firstAid.forEach(q => {
+      q.category = "응급처치";
+    });
+  }
+
+  // Part 5: 도핑 - only doping-specific questions (5-090+)
+  // Search entire file for doping questions starting from 5-090
+  const dopingStartIdx = lines.findIndex(l => l.trim().match(/^5-090\./));
+  if (dopingStartIdx >= 0) {
+    // Find end: Part 6 start or end of file
+    let dopingEndIdx = lines.length;
+    for (let i = dopingStartIdx; i < lines.length; i++) {
+      if (lines[i].trim().match(/^Part\s+6\./)) { dopingEndIdx = i; break; }
+    }
+    const section = lines.slice(dopingStartIdx, dopingEndIdx).join("\n");
+    const tmpFile = filePath + ".tmp_part5";
+    fs.writeFileSync(tmpFile, section, "utf-8");
+    commonSections.doping = parseFile(tmpFile);
+    fs.unlinkSync(tmpFile);
+    commonSections.doping.forEach(q => {
+      q.category = "도핑";
+    });
+  }
+
+  // Part 6: 스포츠 인권
+  const part6 = parts.find(p => p.title.includes("인권"));
+  if (part6) {
+    const section = lines.slice(part6.startLine, part6.endLine).join("\n");
+    const tmpFile = filePath + ".tmp_part6";
+    fs.writeFileSync(tmpFile, section);
+    commonSections.humanRights = parseFile(tmpFile);
+    fs.unlinkSync(tmpFile);
+    commonSections.humanRights.forEach(q => {
+      q.category = "인권·성폭력";
+    });
+  }
+
+  return commonSections;
+}
+
+// Get common sections from bodybuilding file
+const bbFile = path.join(RAW_DIR, "보디빌딩_스포츠지도사2급_구술답변_전체.txt");
+const common = extractCommonSections(bbFile);
+
+console.log(`공통 - 응급처치: ${common.firstAid.length}문항`);
+console.log(`공통 - 도핑: ${common.doping.length}문항`);
+console.log(`공통 - 인권·성폭력: ${common.humanRights.length}문항`);
+console.log(`공통 합계: ${common.firstAid.length + common.doping.length + common.humanRights.length}문항\n`);
+
 // Process all files
 const files = fs.readdirSync(RAW_DIR).filter(f => f.endsWith(".txt") && f.includes("구술답변"));
 const sports = [];
@@ -91,13 +170,48 @@ for (const file of files) {
   }
 
   const filePath = path.join(RAW_DIR, file);
-  const questions = parseFile(filePath);
-  console.log(`${sport.name}: ${questions.length} questions`);
+  const sportQuestions = parseFile(filePath);
+
+  // For non-bodybuilding sports, append common sections
+  // For bodybuilding, the questions already include them
+  let allQuestions;
+  if (sport.id === "bodybuilding") {
+    allQuestions = sportQuestions;
+  } else {
+    // Check if sport already has similar common content (avoid duplicates)
+    const hasFirstAid = sportQuestions.some(q =>
+      q.question.includes("응급처치") || q.question.includes("RICE") || q.question.includes("CPR")
+    );
+    const hasDoping = sportQuestions.some(q =>
+      q.question.includes("도핑") || q.question.includes("doping")
+    );
+    const hasHumanRights = sportQuestions.some(q =>
+      q.question.includes("인권침해") || q.question.includes("성희롱") || q.question.includes("성폭력")
+    );
+
+    allQuestions = [...sportQuestions];
+
+    // Add common sections with section markers
+    if (!hasFirstAid && common.firstAid.length > 0) {
+      allQuestions.push(...common.firstAid.map(q => ({ ...q })));
+    }
+    if (!hasDoping && common.doping.length > 0) {
+      allQuestions.push(...common.doping.map(q => ({ ...q })));
+    }
+    if (!hasHumanRights && common.humanRights.length > 0) {
+      allQuestions.push(...common.humanRights.map(q => ({ ...q })));
+    }
+  }
+
+  // Re-number IDs
+  allQuestions.forEach((q, idx) => { q.id = idx + 1; });
+
+  console.log(`${sport.name}: ${sportQuestions.length} 고유 + 공통 = ${allQuestions.length}문항`);
 
   sports.push({
     id: sport.id,
     name: sport.name,
-    questions,
+    questions: allQuestions,
   });
 }
 
@@ -107,11 +221,13 @@ sports.sort((a, b) => a.name.localeCompare(b.name, "ko"));
 // Generate TypeScript
 let ts = `// 구술 - 종목별 질의응답 데이터
 // 자동 생성됨 (scripts/parse-oral.js)
+// 공통 영역(응급처치/도핑/인권·성폭력)이 각 종목에 포함됨
 
 export interface OralQuestion {
   id: number;
   question: string;
   answer: string;
+  category?: string; // "응급처치" | "도핑" | "인권·성폭력" for common sections
 }
 
 export interface OralSport {
@@ -130,7 +246,8 @@ for (const sport of sports) {
   for (const q of sport.questions) {
     const escapedQ = q.question.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
     const escapedA = q.answer.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
-    ts += `      { id: ${q.id}, question: "${escapedQ}", answer: "${escapedA}" },\n`;
+    const catStr = q.category ? `, category: "${q.category}"` : "";
+    ts += `      { id: ${q.id}, question: "${escapedQ}", answer: "${escapedA}"${catStr} },\n`;
   }
   ts += `    ],\n`;
   ts += `  },\n`;
@@ -139,4 +256,6 @@ for (const sport of sports) {
 ts += `];\n`;
 
 fs.writeFileSync(OUTPUT, ts, "utf-8");
-console.log(`\nGenerated ${OUTPUT} with ${sports.length} sports, ${sports.reduce((sum, s) => sum + s.questions.length, 0)} total questions`);
+const totalQ = sports.reduce((sum, s) => sum + s.questions.length, 0);
+console.log(`\nGenerated ${OUTPUT}`);
+console.log(`${sports.length}개 종목, 총 ${totalQ}문항 (공통 포함)`);

@@ -123,9 +123,25 @@ export default function OralTab() {
 
       {/* Q&A 카드 목록 */}
       <div className="px-3 flex flex-col gap-2">
-        {currentSport?.questions.map((q, idx) => (
+        {currentSport?.questions.map((q, idx) => {
+          // Show category section header when category changes
+          const prevQ = idx > 0 ? currentSport.questions[idx - 1] : null;
+          const showCategoryHeader = q.category && (!prevQ || prevQ.category !== q.category);
+
+          return (
+          <div key={q.id}>
+            {showCategoryHeader && (
+              <div className="flex items-center gap-2 mt-4 mb-2 px-1">
+                <span className="text-[11px] font-bold text-on-primary bg-primary/80 px-2 py-[2px] rounded-full">
+                  공통
+                </span>
+                <span className="text-[12px] font-bold text-text-secondary">
+                  {q.category}
+                </span>
+                <div className="flex-1 h-[1px] bg-divider" />
+              </div>
+            )}
           <div
-            key={q.id}
             className="bg-surface rounded-xl overflow-hidden transition-all"
             style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
           >
@@ -134,12 +150,21 @@ export default function OralTab() {
               onClick={() => toggleQuestion(q.id)}
               className="w-full text-left px-4 py-4 flex items-start gap-3 active:bg-surface-variant/50 transition-colors"
             >
-              <span className="shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary text-[11px] font-bold mt-[1px]">
+              <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold mt-[1px] ${
+                q.category ? "bg-primary/20 text-primary" : "bg-primary/10 text-primary"
+              }`}>
                 {idx + 1}
               </span>
-              <p className="text-[14px] font-semibold text-foreground leading-relaxed flex-1">
-                {q.question}
-              </p>
+              <div className="flex-1">
+                {q.category && (
+                  <span className="inline-block text-[10px] font-medium text-text-hint bg-tag-bg px-[6px] py-[1px] rounded mb-1">
+                    {q.category}
+                  </span>
+                )}
+                <p className="text-[14px] font-semibold text-foreground leading-relaxed">
+                  {q.question}
+                </p>
+              </div>
               <svg
                 width="18"
                 height="18"
@@ -174,7 +199,9 @@ export default function OralTab() {
               </div>
             )}
           </div>
-        ))}
+          </div>
+          );
+        })}
       </div>
     </div>
   );
