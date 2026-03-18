@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* 라이트모드 - 기존 앱 스타일 */
+  --background: #F5F3E7;
+  --surface: #FEFCF3;
+  --surface-variant: #EDEADB;
+  --foreground: #1C1B16;
+  --text-secondary: #3E3B32;
+  --text-tertiary: #5C5A4E;
+  --text-hint: #8A8578;
+  --text-disabled: #B0AC9F;
+  --divider: #D6D3C5;
+  --divider-strong: #C5C1B5;
+  --primary: #6B7A3D;
+  --primary-hover: #5A6833;
+  --on-primary: #FFFFFF;
+  --tag-bg: #EDEADB;
+  --tag-text: #3E3B32;
+  --nav-bg: #FEFCF3;
+  --nav-selected: #6B7A3D;
+  --nav-unselected: #8A8578;
+  --card-shadow: rgba(0, 0, 0, 0.05);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --surface: #121212;
+    --surface-variant: #1E1E1E;
+    --foreground: #F5F5F5;
+    --text-secondary: #E0E0E0;
+    --text-tertiary: #999999;
+    --text-hint: #666666;
+    --text-disabled: #444444;
+    --divider: #1E1E1E;
+    --divider-strong: #2C2C2C;
+    --primary: #60A5FA;
+    --primary-hover: #4B8FE0;
+    --on-primary: #FFFFFF;
+    --tag-bg: #1E1E1E;
+    --tag-text: #E0E0E0;
+    --nav-bg: #121212;
+    --nav-selected: #60A5FA;
+    --nav-unselected: #666666;
+    --card-shadow: rgba(0, 0, 0, 0.3);
   }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-variant: var(--surface-variant);
+  --color-foreground: var(--foreground);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-hint: var(--text-hint);
+  --color-text-disabled: var(--text-disabled);
+  --color-divider: var(--divider);
+  --color-divider-strong: var(--divider-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-text: var(--tag-text);
+  --color-nav-bg: var(--nav-bg);
+  --color-nav-selected: var(--nav-selected);
+  --color-nav-unselected: var(--nav-unselected);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* WebView 최적화 */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 스크롤바 숨기기 (WebView) */
+::-webkit-scrollbar {
+  display: none;
 }
