@@ -152,10 +152,55 @@ function extractCommonSections(filePath) {
 const bbFile = path.join(RAW_DIR, "보디빌딩_스포츠지도사2급_구술답변_전체.txt");
 const common = extractCommonSections(bbFile);
 
-console.log(`공통 - 응급처치: ${common.firstAid.length}문항`);
-console.log(`공통 - 도핑: ${common.doping.length}문항`);
-console.log(`공통 - 인권·성폭력: ${common.humanRights.length}문항`);
-console.log(`공통 합계: ${common.firstAid.length + common.doping.length + common.humanRights.length}문항\n`);
+console.log(`공통(보디빌딩) - 응급처치: ${common.firstAid.length}문항`);
+console.log(`공통(보디빌딩) - 도핑: ${common.doping.length}문항`);
+console.log(`공통(보디빌딩) - 인권·성폭력: ${common.humanRights.length}문항`);
+
+// Get common "생활체육" section
+const commonLifeFile = path.join(RAW_DIR, "공통_생활체육.txt");
+const commonLifeSections = { lifeSports: [], lifeSportsFirstAid: [] };
+if (fs.existsSync(commonLifeFile)) {
+  const content = fs.readFileSync(commonLifeFile, "utf-8");
+  const lines = content.split(/\r?\n/);
+
+  // Find Part boundaries
+  const parts = [];
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].trim().match(/^Part\s+(\d+)\.\s+(.+)/);
+    if (match) parts.push({ partNum: parseInt(match[1]), title: match[2], startLine: i });
+  }
+  for (let i = 0; i < parts.length; i++) {
+    parts[i].endLine = i + 1 < parts.length ? parts[i + 1].startLine : lines.length;
+  }
+
+  // Part 1: 생활체육 공통
+  const part1 = parts.find(p => p.title.includes("생활체육 공통"));
+  if (part1) {
+    const section = lines.slice(part1.startLine, part1.endLine).join("\n");
+    const tmpFile = commonLifeFile + ".tmp1";
+    fs.writeFileSync(tmpFile, section, "utf-8");
+    commonLifeSections.lifeSports = parseFile(tmpFile);
+    fs.unlinkSync(tmpFile);
+    commonLifeSections.lifeSports.forEach(q => { q.category = "생활체육"; });
+  }
+
+  // Part 2: 응급처치 공통 구술
+  const part2 = parts.find(p => p.title.includes("응급처치 공통"));
+  if (part2) {
+    const section = lines.slice(part2.startLine, part2.endLine).join("\n");
+    const tmpFile = commonLifeFile + ".tmp2";
+    fs.writeFileSync(tmpFile, section, "utf-8");
+    commonLifeSections.lifeSportsFirstAid = parseFile(tmpFile);
+    fs.unlinkSync(tmpFile);
+    commonLifeSections.lifeSportsFirstAid.forEach(q => { q.category = "응급처치(공통구술)"; });
+  }
+}
+
+console.log(`공통(생활체육) - 생활체육: ${commonLifeSections.lifeSports.length}문항`);
+console.log(`공통(생활체육) - 응급처치 공통구술: ${commonLifeSections.lifeSportsFirstAid.length}문항`);
+
+const totalCommon = common.firstAid.length + common.doping.length + common.humanRights.length + commonLifeSections.lifeSports.length + commonLifeSections.lifeSportsFirstAid.length;
+console.log(`공통 합계: ${totalCommon}문항\n`);
 
 // Process all files
 const files = fs.readdirSync(RAW_DIR).filter(f => f.endsWith(".txt") && f.includes("구술답변"));
@@ -191,7 +236,15 @@ for (const file of files) {
 
     allQuestions = [...sportQuestions];
 
-    // Add common sections with section markers
+    // Add 생활체육 공통 (always add for all non-bodybuilding sports)
+    if (commonLifeSections.lifeSports.length > 0) {
+      allQuestions.push(...commonLifeSections.lifeSports.map(q => ({ ...q })));
+    }
+    if (commonLifeSections.lifeSportsFirstAid.length > 0) {
+      allQuestions.push(...commonLifeSections.lifeSportsFirstAid.map(q => ({ ...q })));
+    }
+
+    // Add common sections from bodybuilding
     if (!hasFirstAid && common.firstAid.length > 0) {
       allQuestions.push(...common.firstAid.map(q => ({ ...q })));
     }
