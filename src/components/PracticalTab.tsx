@@ -4,21 +4,17 @@ import { useState } from "react";
 import { exercises, categories } from "@/data/practical";
 
 export default function PracticalTab() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("전체");
-  const allCategories = ["전체", ...categories];
+  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
 
-  const filtered =
-    selectedCategory === "전체"
-      ? exercises
-      : exercises.filter((e) => e.category === selectedCategory);
+  const filtered = exercises.filter((e) => e.category === selectedCategory);
 
   return (
     <div className="pb-6">
       {/* 부위 필터 */}
       <div className="sticky top-0 z-20 bg-background px-3 py-3" style={{ boxShadow: "0 2px 8px var(--card-shadow)" }}>
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-          {allCategories.map((cat) => {
-            const count = cat === "전체" ? exercises.length : exercises.filter(e => e.category === cat).length;
+          {categories.map((cat) => {
+            const count = exercises.filter(e => e.category === cat).length;
             return (
               <button
                 key={cat}
