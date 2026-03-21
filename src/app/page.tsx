@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-dvh bg-background">
       {/* 헤더 */}
-      <header className="sticky top-0 z-10 bg-surface border-b border-divider px-4 pt-[env(safe-area-inset-top)] pb-0">
+      <header className="sticky top-0 z-30 bg-surface border-b border-divider px-4 pt-[env(safe-area-inset-top)] pb-0">
         <h1 className="text-lg font-bold text-foreground py-3">
           실기 / 구술
         </h1>
