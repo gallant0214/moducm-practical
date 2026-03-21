@@ -7,7 +7,7 @@ import OralTab from "@/components/OralTab";
 type Tab = "practical" | "oral";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<Tab>("practical");
+  const [activeTab, setActiveTab] = useState<Tab>("oral");
 
   return (
     <div className="flex flex-col min-h-dvh bg-background">
@@ -19,19 +19,6 @@ export default function Home() {
         {/* 탭 */}
         <div className="flex gap-0">
           <button
-            onClick={() => setActiveTab("practical")}
-            className={`flex-1 py-3 text-sm font-semibold text-center transition-colors relative ${
-              activeTab === "practical"
-                ? "text-primary"
-                : "text-text-hint"
-            }`}
-          >
-            실기
-            {activeTab === "practical" && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-full" />
-            )}
-          </button>
-          <button
             onClick={() => setActiveTab("oral")}
             className={`flex-1 py-3 text-sm font-semibold text-center transition-colors relative ${
               activeTab === "oral"
@@ -41,6 +28,19 @@ export default function Home() {
           >
             구술
             {activeTab === "oral" && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-full" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab("practical")}
+            className={`flex-1 py-3 text-sm font-semibold text-center transition-colors relative ${
+              activeTab === "practical"
+                ? "text-primary"
+                : "text-text-hint"
+            }`}
+          >
+            실기(보디빌딩)
+            {activeTab === "practical" && (
               <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-full" />
             )}
           </button>
