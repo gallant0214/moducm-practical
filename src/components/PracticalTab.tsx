@@ -15,7 +15,7 @@ export default function PracticalTab() {
   return (
     <div className="pb-6">
       {/* 부위 필터 */}
-      <div className="sticky top-[calc(env(safe-area-inset-top)+96px)] z-5 bg-background px-3 py-3">
+      <div className="sticky top-[calc(env(safe-area-inset-top)+96px)] z-20 bg-background px-3 py-3 shadow-sm" style={{ boxShadow: "0 2px 8px var(--card-shadow)" }}>
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
           {allCategories.map((cat) => {
             const count = cat === "전체" ? exercises.length : exercises.filter(e => e.category === cat).length;
