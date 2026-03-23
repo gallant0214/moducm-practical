@@ -164,7 +164,7 @@ export default function OralTab() {
   return (
     <div className="pb-6">
       {/* 뒤로가기 + 종목 이름 */}
-      <div className="sticky top-[calc(env(safe-area-inset-top)+96px)] z-5 bg-background px-3 py-3 flex items-center gap-2">
+      <div className="sticky top-0 z-10 bg-background border-b border-divider px-3 py-3 flex items-center gap-2">
         <button
           onClick={() => setSelectedSport(null)}
           className="flex items-center gap-1 text-primary text-sm font-semibold"
