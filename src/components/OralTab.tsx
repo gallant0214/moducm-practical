@@ -3,19 +3,40 @@
 import { useState } from "react";
 import { oralSports, type OralSport } from "@/data/oral";
 
-// 공통 3개 항목 (도핑/응급처치/성폭력)을 보디빌딩에서 추출
+// 공통 3개 항목 (도핑/응급처치/성폭력·인권)을 전체 종목에서 추출 후 중복 제거
 function getCommonSections(): OralSport[] {
-  const bb = oralSports.find((s) => s.id === "bodybuilding");
-  if (!bb) return [];
+  // 모든 종목에서 카테고리별 문항 수집
+  const allByCategory: Record<string, { question: string; answer: string }[]> = {
+    "도핑": [],
+    "응급처치": [],
+    "인권·성폭력": [],
+  };
 
-  const dopingQs = bb.questions.filter((q) => q.category === "도핑");
-  const firstaidQs = bb.questions.filter((q) => q.category === "응급처치");
-  const humanrightsQs = bb.questions.filter((q) => q.category === "인권·성폭력");
+  for (const sport of oralSports) {
+    for (const q of sport.questions) {
+      if (q.category && allByCategory[q.category]) {
+        allByCategory[q.category].push({ question: q.question, answer: q.answer });
+      }
+    }
+  }
+
+  // 중복 제거 (question 기준)
+  const dedup = (qs: { question: string; answer: string }[]) => {
+    const seen = new Set<string>();
+    return qs.filter((q) => {
+      if (seen.has(q.question)) return false;
+      seen.add(q.question);
+      return true;
+    });
+  };
+
+  const strip = (qs: { question: string; answer: string }[]) =>
+    dedup(qs).map((q, i) => ({ id: i + 1, question: q.question, answer: q.answer }));
 
   return [
-    { id: "_common_doping", name: "도핑 (공통)", questions: dopingQs.map((q, i) => ({ ...q, id: i + 1 })) },
-    { id: "_common_firstaid", name: "응급처치 (공통)", questions: firstaidQs.map((q, i) => ({ ...q, id: i + 1 })) },
-    { id: "_common_rights", name: "성폭력·인권 (공통)", questions: humanrightsQs.map((q, i) => ({ ...q, id: i + 1 })) },
+    { id: "_common_doping", name: "도핑 (공통)", questions: strip(allByCategory["도핑"]) },
+    { id: "_common_firstaid", name: "응급처치 (공통)", questions: strip(allByCategory["응급처치"]) },
+    { id: "_common_rights", name: "성폭력·인권 (공통)", questions: strip(allByCategory["인권·성폭력"]) },
   ];
 }
 
