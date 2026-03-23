@@ -1,13 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { oralSports } from "@/data/oral";
+import { oralSports, type OralSport } from "@/data/oral";
+
+// 공통 3개 항목 (도핑/응급처치/성폭력)을 보디빌딩에서 추출
+function getCommonSections(): OralSport[] {
+  const bb = oralSports.find((s) => s.id === "bodybuilding");
+  if (!bb) return [];
+
+  const dopingQs = bb.questions.filter((q) => q.category === "도핑");
+  const firstaidQs = bb.questions.filter((q) => q.category === "응급처치");
+  const humanrightsQs = bb.questions.filter((q) => q.category === "인권·성폭력");
+
+  return [
+    { id: "_common_doping", name: "도핑 (공통)", questions: dopingQs.map((q, i) => ({ ...q, id: i + 1 })) },
+    { id: "_common_firstaid", name: "응급처치 (공통)", questions: firstaidQs.map((q, i) => ({ ...q, id: i + 1 })) },
+    { id: "_common_rights", name: "성폭력·인권 (공통)", questions: humanrightsQs.map((q, i) => ({ ...q, id: i + 1 })) },
+  ];
+}
+
+const commonSections = getCommonSections();
 
 export default function OralTab() {
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
   const [openQuestionId, setOpenQuestionId] = useState<number | null>(null);
 
-  const currentSport = oralSports.find((s) => s.id === selectedSport);
+  const allItems = [...commonSections, ...oralSports];
+  const currentSport = allItems.find((s) => s.id === selectedSport);
 
   const toggleQuestion = (id: number) => {
     setOpenQuestionId(openQuestionId === id ? null : id);
@@ -44,8 +63,45 @@ export default function OralTab() {
   if (!selectedSport) {
     return (
       <div className="px-3 py-4">
-        <p className="text-text-hint text-xs px-1 mb-3">
-          종목을 선택하세요
+        {/* 공통 영역 (상단 고정) */}
+        <p className="text-text-hint text-xs px-1 mb-2 font-bold">
+          공통 영역
+        </p>
+        <div className="flex flex-col gap-2 mb-5">
+          {commonSections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => {
+                setSelectedSport(section.id);
+                setOpenQuestionId(null);
+              }}
+              className="flex items-center justify-between bg-primary/5 border border-primary/20 rounded-xl px-4 py-3.5 active:scale-[0.98] transition-transform"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center">
+                  <span className="text-primary font-bold text-xs">
+                    {section.name.includes("도핑") ? "D" : section.name.includes("응급") ? "F" : "H"}
+                  </span>
+                </div>
+                <div className="text-left">
+                  <p className="text-[14px] font-bold text-foreground">
+                    {section.name}
+                  </p>
+                  <p className="text-[11px] text-text-hint mt-[1px]">
+                    {section.questions.length}개 문항
+                  </p>
+                </div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-disabled">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          ))}
+        </div>
+
+        {/* 종목별 */}
+        <p className="text-text-hint text-xs px-1 mb-2 font-bold">
+          종목 선택
         </p>
         <div className="flex flex-col gap-2">
           {oralSports.map((sport) => (
@@ -73,15 +129,7 @@ export default function OralTab() {
                   </p>
                 </div>
               </div>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="text-text-disabled"
-              >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-text-disabled">
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>
