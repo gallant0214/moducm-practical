@@ -39,11 +39,8 @@ export default function PracticalTab() {
       {/* 운동 동작 그리드 */}
       <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
         {filtered.map((exercise) => (
-          <a
+          <div
             key={exercise.id}
-            href={exercise.url}
-            target="_blank"
-            rel="noopener noreferrer"
             className="bg-surface rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-transform block"
             style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
           >
@@ -83,7 +80,7 @@ export default function PracticalTab() {
                 {exercise.category}
               </span>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>

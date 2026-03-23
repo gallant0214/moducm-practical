@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>운동 이미지 생성기</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e8e9ed;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+h1{font-size:1.5rem;margin-bottom:20px;background:linear-gradient(135deg,#e8e9ed,#6c5ce7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.api-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.api-bar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid #23252d;border-radius:8px;background:#1a1b23;color:#e8e9ed;font-size:.875rem}
+.api-bar .status{padding:10px 16px;border-radius:8px;font-size:.8rem;display:flex;align-items:center;gap:6px}
+.status.ok{background:#0d3320;color:#34d399;border:1px solid #065f46}
+.status.err{background:#3b1111;color:#f87171;border:1px solid #7f1d1d}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:16px}
+
+.card{background:#1a1b23;border:1px solid #23252d;border-radius:12px;overflow:hidden;transition:border-color .2s}
+.card:hover{border-color:#6c5ce7}
+.card-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #23252d}
+.card-header h3{font-size:.85rem;font-weight:600}
+.card-header .cat{font-size:.7rem;padding:3px 8px;border-radius:100px;background:rgba(108,92,231,.15);color:#a29bfe}
+.card-images{display:flex;gap:2px;min-height:200px;background:#0f1117}
+.card-images .img-box{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card-images .img-box img{max-width:100%;max-height:260px;object-fit:contain}
+.img-label{position:absolute;top:6px;left:6px;font-size:.6rem;padding:2px 6px;border-radius:4px;font-weight:600}
+.img-label.ref{background:rgba(0,0,0,.6);color:#94a3b8}
+.img-label.gen{background:rgba(108,92,231,.7);color:#fff}
+.placeholder{color:#4a4b57;font-size:.8rem;text-align:center;padding:20px}
+
+.card-actions{padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:8px 16px;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:#6c5ce7;color:#fff}
+.btn-primary:hover{background:#5b4bd5}
+.btn-primary:disabled{background:#333;color:#666;cursor:not-allowed}
+.btn-danger{background:#dc2626;color:#fff}
+.btn-danger:hover{background:#b91c1c}
+.btn-outline{background:transparent;border:1px solid #23252d;color:#94a3b8}
+.btn-outline:hover{border-color:#6c5ce7;color:#e8e9ed}
+.btn-success{background:#059669;color:#fff}
+.btn-success:hover{background:#047857}
+
+.card .status-msg{padding:0 16px 12px;font-size:.75rem;color:#94a3b8}
+.card .status-msg.error{color:#f87171}
+.card .status-msg.success{color:#34d399}
+
+.prompt-edit{width:100%;padding:8px 12px;border:1px solid #23252d;border-radius:8px;background:#0f1117;color:#e8e9ed;font-size:.75rem;font-family:inherit;resize:vertical;min-height:60px;margin-bottom:8px}
+
+.top-actions{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.top-actions select{padding:8px 12px;border:1px solid #23252d;border-radius:8px;background:#1a1b23;color:#e8e9ed;font-size:.85rem}
+.progress{font-size:.85rem;color:#94a3b8;margin-left:auto}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal{background:#1a1b23;border-radius:16px;padding:20px;max-width:90vw;max-height:90vh;overflow:auto}
+.modal img{max-width:100%;max-height:80vh;object-fit:contain}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>운동 이미지 생성기 (Gemini 3 Pro)</h1>
+
+  <div class="api-bar">
+    <input type="password" id="apiKey" placeholder="Gemini API Key 입력..." value="AIzaSyD91YW1NjU85DuzYdeA2SLTXyb1RGM6qMA">
+    <div class="status ok" id="apiStatus">● 키 입력됨</div>
+  </div>
+
+  <div class="top-actions">
+    <select id="catFilter">
+      <option value="전체">전체 (48)</option>
+      <option value="가슴">가슴 (6)</option>
+      <option value="이두">이두 (8)</option>
+      <option value="삼두">삼두 (5)</option>
+      <option value="전완">전완 (4)</option>
+      <option value="등">등 (9)</option>
+      <option value="어깨">어깨 (7)</option>
+      <option value="하체">하체 (9)</option>
+    </select>
+    <button class="btn btn-primary" onclick="generateAll()">선택 카테고리 전체 생성</button>
+    <button class="btn btn-danger" onclick="stopAll()">전체 중지</button>
+    <button class="btn btn-success" onclick="downloadAll()">완료 이미지 다운로드 (ZIP)</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal-overlay" id="modal" onclick="this.classList.remove('active')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <img id="modalImg" src="">
+  </div>
+</div>
+
+<script type="module">
+import { GoogleGenAI } from "https://esm.sh/@google/genai@latest";
+
+const DEFAULT_PROMPT = `Edit this reference exercise illustration. Copy the EXACT same pose, hand grip direction, palm/back-of-hand orientation, finger positions, dumbbell/barbell angle and position from the reference. Show BOTH the contraction and extension phases of the movement exactly as shown in the reference. Redraw in a completely new original art style: teal/cyan body color with orange highlighted target muscles on plain light gray background. Make it look like a new original illustration, not a copy. Remove all watermarks and source branding. Write only the title "KOREAN_NAME" in bold Korean at the top. Do NOT add any muscle labels, arrows, or annotation lines.`;
+
+const EXERCISES = [
+  {ko:"플랫 바벨 벤치 프레스",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Barbell-Bench-Press-resized-768x512.png"},
+  {ko:"인클라인 바벨 벤치프레스",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/11/incline-barbell-bench-press-resized-768x512.png"},
+  {ko:"플랫 덤벨 벤치프레스",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Bench-Press-resized-768x512.png"},
+  {ko:"플랫 덤벨 플라이",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/11/dumbbell-fly-resized-768x512.png"},
+  {ko:"인클라인 덤벨 벤치프레스",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/11/incline-dumbbell-bench-press-resized-768x512.png"},
+  {ko:"플랫 덤벨 풀오버",cat:"가슴",ref:"https://weighttraining.guide/wp-content/uploads/2016/06/Dumbbell-Pullover-resized-768x512.png"},
+  {ko:"스탠딩 바벨 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/barbell-curl-resized-768x512.png"},
+  {ko:"스탠딩 리버스 바벨 컬",cat:"이두",ref:"ref/standing-reverse-barbell-curl.png"},
+  {ko:"스탠딩 덤벨 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Alternate-Biceps-Curl-resized-768x512.png"},
+  {ko:"스탠딩 얼터네이트 덤벨 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2021/09/Seated-Alternating-dumbbell-Curl-768x512.png"},
+  {ko:"덤벨 컨센트레이션 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Concentration-Curl-resized-768x512.png"},
+  {ko:"스탠딩 덤벨 해머 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2016/11/Dumbbell-Hammer-Curl-resized-768x512.png"},
+  {ko:"스탠딩 얼터네이트 해머 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Dumbbell-cross-body-hammer-curl-768x512.png"},
+  {ko:"스쿼팅 바벨 컬",cat:"이두",ref:"https://weighttraining.guide/wp-content/uploads/2022/04/Standing-barbell-concentration-curl-768x512.png"},
+  {ko:"스탠딩 바벨 오버헤드 트라이셉스 익스텐션",cat:"삼두",ref:"https://weighttraining.guide/wp-content/uploads/2023/07/Standing-overhead-barbell-triceps-extension-768x512.png"},
+  {ko:"라잉 바벨 트라이셉스 익스텐션",cat:"삼두",ref:"https://weighttraining.guide/wp-content/uploads/2017/08/lying-barbell-triceps-extension-resized-768x512.png"},
+  {ko:"스탠딩 원암 덤벨 오버헤드 트라이셉스 익스텐션",cat:"삼두",ref:"https://weighttraining.guide/wp-content/uploads/2022/07/Standing-one-arm-overhead-dumbbell-triceps-extension-768x512.png"},
+  {ko:"덤벨 킥백",cat:"삼두",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Kickback-resized-768x512.png"},
+  {ko:"벤치 딥스",cat:"삼두",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/bench-dip-resized-768x512.png"},
+  {ko:"바벨 리스트 컬",cat:"전완",ref:"https://weighttraining.guide/wp-content/uploads/2019/03/Seated-barbell-wrist-curl-resized-768x512.png"},
+  {ko:"바벨 리버스 리스트 컬",cat:"전완",ref:"https://weighttraining.guide/wp-content/uploads/2021/08/Barbell-reverse-wrist-curl-over-bench-768x512.png"},
+  {ko:"덤벨 리스트 컬",cat:"전완",ref:"https://weighttraining.guide/wp-content/uploads/2017/06/seated-dumbbell-wrist-curl-resized-768x512.png"},
+  {ko:"덤벨 리버스 리스트 컬",cat:"전완",ref:"https://weighttraining.guide/wp-content/uploads/2022/04/Dumbbell-reverse-wrist-curl-over-bench-1-768x512.png"},
+  {ko:"벤트오버 바벨 로우",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Bent-over-barbell-row-768x512.png"},
+  {ko:"언더그립 바벨 로우",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2021/06/Barbell-underhand-Grip-Bent-Over-Row-768x512.png"},
+  {ko:"벤트오버 원암 덤벨 로우",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/bent-over-one-arm-dumbbell-row-resized-768x512.png"},
+  {ko:"뉴트럴그립 투암 덤벨 로우",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2017/01/bent-over-two-arm-dumbbell-row-resized-768x512.png"},
+  {ko:"바벨 굿모닝 엑서사이즈",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2021/03/Barbell-good-morning-768x512.png"},
+  {ko:"컨벤셔널 데드리프트",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Barbell-Deadlift-1-768x512.png"},
+  {ko:"루마니안 데드리프트",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Barbell-Romanian-Deadlift-768x512.png"},
+  {ko:"덤벨 쉬러그",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/dumbbell-shrug-resized-768x512.png"},
+  {ko:"바벨 쉬러그",cat:"등",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Barbell-Shrug-resized-768x512.png"},
+  {ko:"스탠딩 밀리터리 프레스",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/barbell-military-press-resized-768x512.png"},
+  {ko:"스탠딩 비하인드 넥 프레스",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2017/08/behind-the-neck-barbell-overhead-press-resized-768x512.png"},
+  {ko:"스탠딩 덤벨 숄더 프레스",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Shoulder-Press-resized-768x512.png"},
+  {ko:"스탠딩 바벨 프런트 레이즈",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2021/06/Barbell-Front-Raise-768x512.png"},
+  {ko:"스탠딩 덤벨 프런트 레이즈",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Dumbbell-Standing-Alternate-Front-Raise-resized-768x512.png"},
+  {ko:"덤벨 벤트오버 레터럴 레이즈",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Dumbbell-Rear-Lateral-Raise-resized-768x512.png"},
+  {ko:"바벨 업라이트 로우",cat:"어깨",ref:"https://weighttraining.guide/wp-content/uploads/2016/05/Barbell-Wide-Grip-Upright-Row-resized-768x512.png"},
+  {ko:"백 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/barbell-squat-resized-FIXED-2-768x512.png"},
+  {ko:"바벨 와이드 스탠스 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2017/05/barbell-sumo-squat-resized-new-768x512.png"},
+  {ko:"바벨 프런트 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/barbell-front-squat-new-resized-768x512.png"},
+  {ko:"고블릿 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2022/01/Dumbbell-front-squat-768x512.png"},
+  {ko:"바벨 불가리안 스플릿 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2017/02/Barbell-Bulgarian-Split-Squat-resized-fixed-768x512.png"},
+  {ko:"덤벨 불가리안 스플릿 스쿼트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2016/11/Dumbbell-Bulgarian-Split-Squat-resized-FIXED-768x512.png"},
+  {ko:"스티프 레그 데드리프트",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2017/03/barbell-straight-leg-deadlift-resized-768x512.png"},
+  {ko:"바벨 런지",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Barbell-Lunge-resized-fixed-768x512.png"},
+  {ko:"덤벨 런지",cat:"하체",ref:"https://weighttraining.guide/wp-content/uploads/2016/10/Dumbbell-Lunge-resized-fixed-768x512.png"},
+];
+
+let ai = null;
+let stopFlag = false;
+let generatedImages = {};
+
+// IndexedDB로 이미지 영구 저장
+const DB_NAME = "exerciseImagesDB";
+const DB_STORE = "images";
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(DB_STORE);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function saveToDB(idx, data) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, "readwrite");
+    tx.objectStore(DB_STORE).put(data, idx);
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function loadAllFromDB() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, "readonly");
+    const store = tx.objectStore(DB_STORE);
+    const req = store.getAll();
+    const reqKeys = store.getAllKeys();
+    tx.oncomplete = () => {
+      const result = {};
+      reqKeys.result.forEach((key, i) => { result[key] = req.result[i]; });
+      resolve(result);
+    };
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function deleteFromDB(idx) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, "readwrite");
+    tx.objectStore(DB_STORE).delete(idx);
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function getAI() {
+  const key = document.getElementById("apiKey").value.trim();
+  if (!key) { alert("API 키를 입력하세요"); return null; }
+  if (!ai) ai = new GoogleGenAI({ apiKey: key });
+  return ai;
+}
+
+async function fetchAsBase64(url) {
+  // 로컬/상대경로 파일은 직접 fetch
+  if (!url.startsWith("http")) {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`로컬 파일 로드 실패: ${resp.status}`);
+    const blob = await resp.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result.split(",")[1]);
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  // 외부 URL은 프록시 사용
+  const proxies = [
+    (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+    (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  ];
+  let lastErr;
+  for (const proxy of proxies) {
+    try {
+      const resp = await fetch(proxy(url));
+      if (!resp.ok) continue;
+      const blob = await resp.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result.split(",")[1]);
+        reader.readAsDataURL(blob);
+      });
+    } catch (e) { lastErr = e; }
+  }
+  throw new Error(`이미지 다운로드 실패: ${lastErr?.message || "all proxies failed"}`);
+}
+
+async function generateOne(idx) {
+  const ex = EXERCISES[idx];
+  const card = document.getElementById(`card-${idx}`);
+  const statusEl = card.querySelector(".status-msg");
+  const promptEl = card.querySelector(".prompt-edit");
+  const genBox = card.querySelector(".gen-box");
+  const genBtn = card.querySelector(".gen-btn");
+
+  const client = getAI();
+  if (!client) return;
+
+  genBtn.disabled = true;
+  statusEl.className = "status-msg";
+  statusEl.textContent = "⏳ 원본 이미지 다운로드 중...";
+
+  try {
+    const base64 = await fetchAsBase64(ex.ref);
+    statusEl.textContent = "⏳ Gemini 3 Pro로 이미지 생성 중... (최대 30초)";
+
+    const prompt = (promptEl.value || DEFAULT_PROMPT).replace(/KOREAN_NAME/g, ex.ko);
+
+    // 3단계 시도: 이미지편집 → 이미지+간단프롬프트 → 텍스트전용
+    let response;
+    let attempt = 0;
+
+    // 1차: 원본 이미지 + 프롬프트
+    try {
+      attempt = 1;
+      statusEl.textContent = "⏳ [1/3] 원본 참조 이미지 편집 중...";
+      response = await client.models.generateContent({
+        model: "gemini-3-pro-image-preview",
+        contents: [
+          { role: "user", parts: [
+            { inlineData: { mimeType: "image/png", data: base64 } },
+            { text: prompt },
+          ]},
+        ],
+        config: { responseModalities: ["IMAGE", "TEXT"] },
+      });
+      if (response.candidates?.[0]?.finishReason === "MALFORMED_FUNCTION_CALL") throw new Error("retry");
+    } catch {
+      // 2차: 이미지 + 짧은 프롬프트
+      try {
+        attempt = 2;
+        statusEl.textContent = "⏳ [2/3] 간단 프롬프트로 재시도 중...";
+        response = await client.models.generateContent({
+          model: "gemini-3-pro-image-preview",
+          contents: [
+            { role: "user", parts: [
+              { inlineData: { mimeType: "image/png", data: base64 } },
+              { text: `Redraw this exercise illustration in a new style: teal body, orange muscles, light gray background. Title: "${ex.ko}". Remove watermarks and all text labels. Show both contraction and extension poses.` },
+            ]},
+          ],
+          config: { responseModalities: ["IMAGE", "TEXT"] },
+        });
+        if (response.candidates?.[0]?.finishReason === "MALFORMED_FUNCTION_CALL") throw new Error("retry");
+      } catch {
+        // 3차: 텍스트만으로 생성
+        attempt = 3;
+        statusEl.textContent = "⏳ [3/3] 텍스트 기반 생성 중...";
+        response = await client.models.generateContent({
+          model: "gemini-3-pro-image-preview",
+          contents: `Draw a professional exercise illustration of "${ex.ko}". Show BOTH the starting position and the ending position of the movement side by side. Style: teal/cyan anatomical body with orange highlighted target muscles on plain light gray background. Write only the title "${ex.ko}" in bold Korean at the top. No muscle labels, no arrows, no annotation lines. Clean and simple.`,
+          config: { responseModalities: ["IMAGE", "TEXT"] },
+        });
+      }
+    }
+
+    const parts = response.candidates?.[0]?.content?.parts || [];
+    let imageData = null;
+    for (const part of parts) {
+      if (part.inlineData) {
+        imageData = part.inlineData;
+        break;
+      }
+    }
+
+    if (!imageData) {
+      throw new Error(`이미지 생성 실패 (${attempt}차 시도): ${response.candidates?.[0]?.finishReason}`);
+    }
+
+    const imgUrl = `data:${imageData.mimeType};base64,${imageData.data}`;
+    genBox.innerHTML = `<span class="img-label gen">생성</span><img src="${imgUrl}" onclick="showModal(this.src)" style="cursor:zoom-in">`;
+    generatedImages[idx] = { name: ex.ko, data: imageData.data, mime: imageData.mimeType };
+    await saveToDB(idx, generatedImages[idx]);
+    statusEl.className = "status-msg success";
+    statusEl.textContent = "✅ 생성 완료! (자동 저장됨) 클릭하면 확대";
+  } catch (err) {
+    statusEl.className = "status-msg error";
+    statusEl.textContent = `❌ ${err.message}`;
+  } finally {
+    genBtn.disabled = false;
+  }
+}
+
+window.generateOne = generateOne;
+
+window.generateAll = async function() {
+  stopFlag = false;
+  const cat = document.getElementById("catFilter").value;
+  const indices = EXERCISES.map((e, i) => i).filter(i => cat === "전체" || EXERCISES[i].cat === cat);
+  const total = indices.length;
+  let done = 0;
+
+  for (const idx of indices) {
+    if (stopFlag) break;
+    document.getElementById("progress").textContent = `${++done}/${total} 진행 중...`;
+    await generateOne(idx);
+    if (!stopFlag && done < total) await new Promise(r => setTimeout(r, 2000));
+  }
+  document.getElementById("progress").textContent = stopFlag ? "중지됨" : `${done}/${total} 완료!`;
+};
+
+window.stopAll = function() {
+  stopFlag = true;
+  document.getElementById("progress").textContent = "중지 요청됨...";
+};
+
+window.showModal = function(src) {
+  document.getElementById("modalImg").src = src;
+  document.getElementById("modal").classList.add("active");
+};
+
+window.downloadOne = function(idx) {
+  const img = generatedImages[idx];
+  if (!img) { alert("먼저 이미지를 생성하세요"); return; }
+  const slug = img.name.replace(/[^가-힣a-zA-Z0-9]/g, "-").replace(/-+/g, "-");
+  const ext = img.mime.includes("jpeg") ? "jpg" : "png";
+  const a = document.createElement("a");
+  a.href = `data:${img.mime};base64,${img.data}`;
+  a.download = `${slug}.${ext}`;
+  a.click();
+};
+
+window.downloadAll = async function() {
+  const keys = Object.keys(generatedImages);
+  if (keys.length === 0) { alert("생성된 이미지가 없습니다"); return; }
+  for (const idx of keys) {
+    downloadOne(parseInt(idx));
+    await new Promise(r => setTimeout(r, 300));
+  }
+};
+
+// Render cards
+function render() {
+  const cat = document.getElementById("catFilter").value;
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  EXERCISES.forEach((ex, i) => {
+    if (cat !== "전체" && ex.cat !== cat) return;
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = `card-${i}`;
+    card.innerHTML = `
+      <div class="card-header">
+        <h3>${ex.ko}</h3>
+        <span class="cat">${ex.cat}</span>
+      </div>
+      <div class="card-images">
+        <div class="img-box" style="background:#141519">
+          <span class="img-label ref">원본참조</span>
+          <img src="${ex.ref}" loading="lazy" onclick="showModal(this.src)" style="cursor:zoom-in">
+        </div>
+        <div class="img-box gen-box" style="background:#0f1117">
+          ${generatedImages[i]
+            ? `<span class="img-label gen">생성</span><img src="data:${generatedImages[i].mime};base64,${generatedImages[i].data}" onclick="showModal(this.src)" style="cursor:zoom-in">`
+            : `<div class="placeholder">생성 버튼을 클릭하세요</div>`}
+        </div>
+      </div>
+      <div class="card-actions">
+        <textarea class="prompt-edit" placeholder="프롬프트 수정 (비우면 기본값 사용)">${DEFAULT_PROMPT.replace(/KOREAN_NAME/g, ex.ko)}</textarea>
+        <button class="btn btn-primary gen-btn" onclick="generateOne(${i})">🎨 생성</button>
+        <button class="btn btn-outline" onclick="generateOne(${i})">🔄 재생성</button>
+        <button class="btn btn-success" onclick="downloadOne(${i})">💾 저장</button>
+      </div>
+      <div class="status-msg"></div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+document.getElementById("catFilter").addEventListener("change", render);
+
+// 페이지 로드 시 저장된 이미지 복원
+(async () => {
+  try {
+    generatedImages = await loadAllFromDB();
+    const count = Object.keys(generatedImages).length;
+    if (count > 0) {
+      document.getElementById("progress").textContent = `💾 저장된 이미지 ${count}장 복원됨`;
+    }
+  } catch (e) {
+    console.warn("DB 로드 실패:", e);
+  }
+  render();
+})();
+</script>
+</body>
+</html>
