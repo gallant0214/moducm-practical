@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { exercises, categories } from "@/data/practical";
 
 export default function PracticalTab() {
@@ -39,8 +40,9 @@ export default function PracticalTab() {
       {/* 운동 동작 그리드 */}
       <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
         {filtered.map((exercise) => (
-          <div
+          <Link
             key={exercise.id}
+            href={`/exercise/${exercise.id}`}
             className="bg-surface rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-transform block"
             style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
           >
@@ -80,7 +82,7 @@ export default function PracticalTab() {
                 {exercise.category}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
