@@ -464,12 +464,12 @@ export const exercises: Exercise[] = [
     "몸통을 약간 앞쪽으로 보내며 '크런칭' 자세로 복부근육을 수축시켰는가?",
     "동시에 하체 전면 근육도 수축시켰는가?",
   ]},
-  { id: 70, name: "Front Lat Spread", image: "/exercises/클래식피지크-프론트-더블-바이셉스.png", category: "클래식 보디빌딩", checklist: [
+  { id: 70, name: "Front Lat Spread", image: "/exercises/클래식피지크-프론트-랫-스프레드.png", category: "클래식 보디빌딩", checklist: [
     "심판을 향해 정면으로 서서 다리와 발의 안쪽 라인을 15cm까지 벌렸는가?",
     "펼치거나 주먹을 쥔 손을 허리 하부 또는 복사근에 위치시켜 광배근을 펼쳐 보였는가?",
     "머리부터 발끝까지 가능한 한 많은 전면 근육을 수축했는가?",
   ]},
-  { id: 71, name: "Back Lat Spread", image: "/exercises/클래식피지크-백-더블-바이셉스.png", category: "클래식 보디빌딩", checklist: [
+  { id: 71, name: "Back Lat Spread", image: "/exercises/클래식피지크-백-랫-스프레드.png", category: "클래식 보디빌딩", checklist: [
     "뒷 모습이 심판에게 보이게 서서 다리와 발의 안쪽 라인을 최대 15cm까지 벌렸는가?",
     "양손을 허리 위에 올리고 광배근을 최대한 펼쳐 보였는가?",
     "머리부터 발끝까지 가능한 한 많은 후면 전체 근육을 수축했는가?",
