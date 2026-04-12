@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { exercises, categories } from "@/data/practical";
 import { practicalSports, type PracticalSport } from "@/data/practical_sports";
@@ -212,15 +212,38 @@ function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: 
 export default function PracticalTab() {
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
 
+  // URL 해시에서 종목 상태 복원 (뒤로가기 시 유지)
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) setSelectedSport(hash);
+
+    const onHashChange = () => {
+      const h = window.location.hash.replace("#", "");
+      setSelectedSport(h || null);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const selectSport = (id: string) => {
+    setSelectedSport(id);
+    window.location.hash = id;
+  };
+
+  const goBack = () => {
+    setSelectedSport(null);
+    history.pushState(null, "", window.location.pathname + window.location.search);
+  };
+
   // 보디빌딩 선택
   if (selectedSport === "bodybuilding") {
-    return <BodybuildingView onBack={() => setSelectedSport(null)} />;
+    return <BodybuildingView onBack={goBack} />;
   }
 
   // 기타 종목 선택
   const sport = practicalSports.find((s) => s.id === selectedSport);
   if (sport) {
-    return <SportPracticalView sport={sport} onBack={() => setSelectedSport(null)} />;
+    return <SportPracticalView sport={sport} onBack={goBack} />;
   }
 
   // 종목 선택 화면
@@ -229,7 +252,7 @@ export default function PracticalTab() {
       {/* 보디빌딩 최우선 */}
       <p className="text-text-hint text-xs px-1 mb-2 font-bold">보디빌딩</p>
       <button
-        onClick={() => setSelectedSport("bodybuilding")}
+        onClick={() => selectSport("bodybuilding")}
         className="w-full flex items-center justify-between bg-primary/5 border border-primary/20 rounded-xl px-4 py-4 mb-5 active:scale-[0.98] transition-transform"
       >
         <div className="flex items-center gap-3">
@@ -252,7 +275,7 @@ export default function PracticalTab() {
         {practicalSports.map((sport) => (
           <button
             key={sport.id}
-            onClick={() => setSelectedSport(sport.id)}
+            onClick={() => selectSport(sport.id)}
             className="flex items-center justify-between bg-surface rounded-xl px-4 py-4 active:scale-[0.98] transition-transform"
             style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
           >
