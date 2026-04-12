@@ -54,6 +54,15 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
         </div>
       </div>
 
+      {/* 핏모델 안내 문구 */}
+      {(selectedCategory === "남자 핏모델" || selectedCategory === "여자 핏모델") && (
+        <div className="mx-3 mt-3 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+          <p className="text-[12px] text-amber-700 font-medium text-center">
+            시험에 출제되는 종목은 아닙니다. 신설 종목으로 참고용입니다.
+          </p>
+        </div>
+      )}
+
       {/* 운동 동작 그리드 */}
       <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
         {filtered.map((exercise) => (

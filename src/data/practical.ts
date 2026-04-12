@@ -431,23 +431,23 @@ export const exercises: Exercise[] = [
     "오른팔을 신체 중심선보다 약간 뒤로 두고 주먹을 꽉 쥐었는가?",
     "왼팔의 팔꿈치를 약간 구부린 채 신체 전방에 위치시켰는가?",
   ]},
-  { id: 64, name: "Front Double Biceps", image: "/exercises/클래식피지크-프론트-더블-바이셉스.png", category: "클래식 보디빌딩", checklist: [
+  { id: 64, name: "Front Double Biceps", image: "/exercises/프론트 더블 바이셉스.png", category: "클래식 보디빌딩", checklist: [
     "심판을 향해 정면으로 서서 한 발을 40~50cm 바깥쪽 앞에 놓았는가?",
     "두 팔을 들어 어깨와 수평한 위치에서 팔꿈치를 구부렸는가?",
     "이두근과 전완근이 수축되도록 주먹을 꽉 쥐고 아래를 향하게 했는가?",
     "머리부터 발끝까지 가능한 한 많은 전면 근육을 수축시켰는가?",
   ]},
-  { id: 65, name: "Side Chest", image: "/exercises/클래식피지크-사이드-체스트.png", category: "클래식 보디빌딩", checklist: [
+  { id: 65, name: "Side Chest", image: "/exercises/사이드 체스트.png", category: "클래식 보디빌딩", checklist: [
     "심판과 가까운 쪽 다리의 무릎을 구부리고 발가락으로 지탱하고 하강 압력을 가해 허벅지·대퇴이두근·비복근을 수축했는가?",
     "심판과 가까운 쪽 팔을 직각으로 구부린 후 주먹을 쥐고 다른 손은 손목을 잡았는가?",
     "배를 넣고 가슴을 살짝 들고 직각으로 구부린 팔의 상승 압력을 이용해 상완이두근을 최대한 수축했는가?",
   ]},
-  { id: 66, name: "Back Double Biceps", image: "/exercises/클래식피지크-백-더블-바이셉스.png", category: "클래식 보디빌딩", checklist: [
+  { id: 66, name: "Back Double Biceps", image: "/exercises/백더블바이셉스.png", category: "클래식 보디빌딩", checklist: [
     "뒤 모습이 심판을 향해 서서 한 발을 뒤로 빼서 발가락으로 지탱했는가?",
     "두 팔을 들어 어깨와 수평한 위치에서 팔꿈치를 구부리고 주먹을 꽉 쥐었는가?",
     "어깨, 상완이두근, 상완삼두근, 등 상하부, 둔근, 허벅지, 비복근 후면 전체를 수축시켰는가?",
   ]},
-  { id: 67, name: "Side Triceps", image: "/exercises/클래식피지크-사이드-트라이셉스.png", category: "클래식 보디빌딩", checklist: [
+  { id: 67, name: "Side Triceps", image: "/exercises/사이드 트라이셉스.png", category: "클래식 보디빌딩", checklist: [
     "심판과 가까운 쪽 다리의 무릎을 굽히고 발바닥을 바닥에 붙였는가?",
     "심판과 먼 쪽 다리의 무릎을 굽히고 발가락으로 지탱했는가?",
     "두 팔을 등 뒤에 놓고 깍지를 끼거나 앞쪽 팔의 손목을 잡았는가?",
@@ -458,18 +458,18 @@ export const exercises: Exercise[] = [
     "숨을 깊게 내쉬고 배꼽을 척추 쪽으로 당긴다는 느낌으로 복부를 안으로 당겼는가?",
     "팔, 복횡근, 다리 전면근육을 수축했는가? (단 복직근은 수축하지 않음)",
   ]},
-  { id: 69, name: "Abdominal & Thighs", image: "/exercises/클래식피지크-앱도미널-앤-싸이.png", category: "클래식 보디빌딩", checklist: [
+  { id: 69, name: "Abdominal & Thighs", image: "/exercises/업도미널 앤 타이.png", category: "클래식 보디빌딩", checklist: [
     "심판을 향해 정면으로 서서 한쪽 다리를 앞에 놓고 발가락으로 지탱했는가?",
     "두 팔을 머리 뒤에 놓고 호흡을 들이마셨는가?",
     "몸통을 약간 앞쪽으로 보내며 '크런칭' 자세로 복부근육을 수축시켰는가?",
     "동시에 하체 전면 근육도 수축시켰는가?",
   ]},
-  { id: 70, name: "Front Lat Spread", image: "/exercises/클래식피지크-프론트-랫-스프레드.png", category: "클래식 보디빌딩", checklist: [
+  { id: 70, name: "Front Lat Spread", image: "/exercises/프론트 랫 스프래드.png", category: "클래식 보디빌딩", checklist: [
     "심판을 향해 정면으로 서서 다리와 발의 안쪽 라인을 15cm까지 벌렸는가?",
     "펼치거나 주먹을 쥔 손을 허리 하부 또는 복사근에 위치시켜 광배근을 펼쳐 보였는가?",
     "머리부터 발끝까지 가능한 한 많은 전면 근육을 수축했는가?",
   ]},
-  { id: 71, name: "Back Lat Spread", image: "/exercises/클래식피지크-백-랫-스프레드.png", category: "클래식 보디빌딩", checklist: [
+  { id: 71, name: "Back Lat Spread", image: "/exercises/백 렛 스프레드.png", category: "클래식 보디빌딩", checklist: [
     "뒷 모습이 심판에게 보이게 서서 다리와 발의 안쪽 라인을 최대 15cm까지 벌렸는가?",
     "양손을 허리 위에 올리고 광배근을 최대한 펼쳐 보였는가?",
     "머리부터 발끝까지 가능한 한 많은 후면 전체 근육을 수축했는가?",
