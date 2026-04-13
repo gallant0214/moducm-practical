@@ -63,45 +63,92 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
         </div>
       )}
 
-      {/* 운동 동작 그리드 */}
-      <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
-        {filtered.map((exercise) => (
-          <Link
-            key={exercise.id}
-            href={`/exercise/${exercise.id}`}
-            className="bg-surface rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-transform block"
-            style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
-          >
-            <div className="aspect-[3/2] bg-surface-variant flex items-center justify-center relative">
-              {exercise.image ? (
-                <img
-                  src={exercise.image}
-                  alt={exercise.name}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="flex flex-col items-center gap-1 text-text-disabled">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <span className="text-[10px]">이미지 준비중</span>
+      {/* 운동 동작 / 포즈 그리드 */}
+      {(() => {
+        const poseCategories = ["남자 보디빌딩", "남자 피지크", "클래식 보디빌딩", "남자 클래식 피지크", "남자 핏모델", "여자 피지크", "여자 보디피트니스", "여자 비키니", "여자 핏모델"];
+        const isPose = poseCategories.includes(selectedCategory);
+
+        if (isPose) {
+          return (
+            <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
+              {filtered.map((exercise) => (
+                <Link
+                  key={exercise.id}
+                  href={`/exercise/${exercise.id}`}
+                  className="bg-surface rounded-2xl overflow-hidden active:scale-[0.97] transition-transform block border border-divider/50"
+                  style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+                >
+                  <div className="aspect-[3/4] bg-gradient-to-b from-slate-100 to-slate-200 flex items-center justify-center relative p-2">
+                    {exercise.image ? (
+                      <img
+                        src={exercise.image}
+                        alt={exercise.name}
+                        className="w-full h-full object-contain drop-shadow-sm"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center gap-1 text-text-disabled">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <path d="M21 15l-5-5L5 21" />
+                        </svg>
+                        <span className="text-[10px]">이미지 준비중</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="px-3 py-3 bg-surface">
+                    <p className="text-[13px] font-bold text-foreground leading-snug line-clamp-2 text-center">
+                      {exercise.name}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          );
+        }
+
+        return (
+          <div className="relative z-0 px-3 pt-3 grid grid-cols-2 gap-3">
+            {filtered.map((exercise) => (
+              <Link
+                key={exercise.id}
+                href={`/exercise/${exercise.id}`}
+                className="bg-surface rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-transform block"
+                style={{ boxShadow: "0 1px 3px var(--card-shadow)" }}
+              >
+                <div className="aspect-[3/2] bg-surface-variant flex items-center justify-center relative">
+                  {exercise.image ? (
+                    <img
+                      src={exercise.image}
+                      alt={exercise.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center gap-1 text-text-disabled">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                      </svg>
+                      <span className="text-[10px]">이미지 준비중</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <div className="px-3 py-2.5">
-              <p className="text-[12px] font-bold text-foreground leading-tight line-clamp-2">
-                {exercise.name}
-              </p>
-              <span className="inline-block mt-1 px-2 py-[1px] rounded-full bg-tag-bg text-tag-text text-[10px] font-medium">
-                {exercise.category}
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+                <div className="px-3 py-2.5">
+                  <p className="text-[12px] font-bold text-foreground leading-tight line-clamp-2">
+                    {exercise.name}
+                  </p>
+                  <span className="inline-block mt-1 px-2 py-[1px] rounded-full bg-tag-bg text-tag-text text-[10px] font-medium">
+                    {exercise.category}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        );
+      })()}
     </div>
   );
 }

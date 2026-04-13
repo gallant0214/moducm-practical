@@ -51,12 +51,16 @@ export default function ExerciseDetailPage() {
 
       <main className="flex-1 pb-8">
         {/* 운동 이미지 */}
-        <div className="w-full bg-surface-variant flex items-center justify-center" style={{ minHeight: "220px" }}>
+        {(() => {
+          const poseCategories = ["남자 보디빌딩", "남자 피지크", "클래식 보디빌딩", "남자 클래식 피지크", "남자 핏모델", "여자 피지크", "여자 보디피트니스", "여자 비키니", "여자 핏모델"];
+          const isPose = poseCategories.includes(exercise.category);
+          return (
+        <div className={`w-full flex items-center justify-center ${isPose ? "bg-gradient-to-b from-slate-100 to-slate-200 py-4" : "bg-surface-variant"}`} style={{ minHeight: isPose ? "360px" : "220px" }}>
           {exercise.image ? (
             <img
               src={exercise.image}
               alt={exercise.name}
-              className="w-full max-h-[320px] object-contain"
+              className={isPose ? "max-h-[420px] object-contain drop-shadow-md" : "w-full max-h-[320px] object-contain"}
             />
           ) : (
             <div className="flex flex-col items-center gap-2 py-12 text-text-disabled">
@@ -69,6 +73,8 @@ export default function ExerciseDetailPage() {
             </div>
           )}
         </div>
+          );
+        })()}
 
         {/* 체크리스트 */}
         <div className="px-4 pt-5">
