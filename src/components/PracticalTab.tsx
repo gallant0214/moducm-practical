@@ -21,7 +21,7 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
       <div className="sticky top-0 z-10 bg-background border-b border-divider px-3 py-3 flex items-center gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1 text-primary text-sm font-semibold"
+          className="flex items-center gap-1 text-primary text-sm font-semibold py-1 px-1 -ml-1 active:opacity-70 transition-opacity"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
@@ -163,7 +163,7 @@ function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: 
       <div className="sticky top-0 z-10 bg-background border-b border-divider px-3 py-3 flex items-center gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1 text-primary text-sm font-semibold"
+          className="flex items-center gap-1 text-primary text-sm font-semibold py-1 px-1 -ml-1 active:opacity-70 transition-opacity"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
