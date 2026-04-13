@@ -10,7 +10,12 @@ export default function ExerciseDetailPage() {
   const exercise = exercises.find((e) => e.id === id);
 
   const goBack = () => {
-    router.push("/#bodybuilding");
+    const cat = exercise?.category;
+    if (cat) {
+      router.push(`/#bodybuilding?cat=${encodeURIComponent(cat)}`);
+    } else {
+      router.push("/#bodybuilding");
+    }
   };
 
   if (!exercise) {

@@ -7,7 +7,14 @@ import { practicalSports, type PracticalSport } from "@/data/practical_sports";
 
 // 보디빌딩 상세 뷰 (기존 운동 그리드)
 function BodybuildingView({ onBack }: { onBack: () => void }) {
-  const [selectedCategory, setSelectedCategory] = useState<string>("전체");
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      const catMatch = hash.match(/[?&]cat=([^&]*)/);
+      if (catMatch) return decodeURIComponent(catMatch[1]);
+    }
+    return "전체";
+  });
   const allCategories = ["전체", ...categories];
 
   const filtered =
