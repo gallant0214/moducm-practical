@@ -32,8 +32,8 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
         <span className="text-sm font-bold text-foreground">보디빌딩</span>
       </div>
 
-      {/* 부위 필터 */}
-      <div className="bg-background px-3 py-3" style={{ boxShadow: "0 2px 8px var(--card-shadow)" }}>
+      {/* 부위 필터 (sticky) */}
+      <div className="sticky top-[45px] z-[9] bg-background px-3 py-3" style={{ boxShadow: "0 2px 8px var(--card-shadow)" }}>
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
           {allCategories.map((cat) => {
             const count = cat === "전체" ? exercises.length : exercises.filter(e => e.category === cat).length;
