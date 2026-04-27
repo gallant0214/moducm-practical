@@ -218,10 +218,20 @@ for (const file of files) {
   const sportQuestions = parseFile(filePath);
 
   // For non-bodybuilding sports, append common sections
-  // For bodybuilding, the questions already include them
+  // For bodybuilding, apply categories to its own common-section questions
   let allQuestions;
   if (sport.id === "bodybuilding") {
-    allQuestions = sportQuestions;
+    // Tag bodybuilding's own 응급처치/도핑/인권 questions with categories
+    // so they show up under common section filters
+    const firstAidQs = new Set(common.firstAid.map(q => q.question));
+    const dopingQs = new Set(common.doping.map(q => q.question));
+    const humanRightsQs = new Set(common.humanRights.map(q => q.question));
+    allQuestions = sportQuestions.map(q => {
+      if (firstAidQs.has(q.question)) return { ...q, category: "응급처치" };
+      if (dopingQs.has(q.question)) return { ...q, category: "도핑" };
+      if (humanRightsQs.has(q.question)) return { ...q, category: "인권·성폭력" };
+      return q;
+    });
   } else {
     // Check if sport already has similar common content (avoid duplicates)
     const hasFirstAid = sportQuestions.some(q =>
@@ -266,6 +276,37 @@ for (const file of files) {
     name: sport.name,
     questions: allQuestions,
   });
+}
+
+// Preserve sports that exist in current oral.ts but are not in SPORT_MAP
+// (hand-curated entries like 유소년/노인/장애인 스포츠지도사, 검도, 공수도, etc.)
+const knownIds = new Set(sports.map(s => s.id));
+if (fs.existsSync(OUTPUT)) {
+  try {
+    const existing = fs.readFileSync(OUTPUT, "utf-8");
+    // Match each sport block: { id: "...", name: "...", questions: [...] },
+    const blockRe = /\{\s*\n\s*id:\s*"([^"]+)",\s*\n\s*name:\s*"([^"]+)",\s*\n\s*questions:\s*\[\s*\n([\s\S]*?)\n\s*\],\s*\n\s*\},/g;
+    const qLineRe = /\{\s*id:\s*(\d+),\s*question:\s*"((?:[^"\\]|\\.)*)",\s*answer:\s*"((?:[^"\\]|\\.)*)"(?:,\s*category:\s*"((?:[^"\\]|\\.)*)")?\s*\}/g;
+    let m;
+    while ((m = blockRe.exec(existing)) !== null) {
+      const sid = m[1];
+      const sname = m[2];
+      if (knownIds.has(sid)) continue;
+      const body = m[3];
+      const qs = [];
+      let qm;
+      while ((qm = qLineRe.exec(body)) !== null) {
+        const decode = s => s.replace(/\\"/g, '"').replace(/\\n/g, "\n").replace(/\\\\/g, "\\");
+        const q = { id: parseInt(qm[1]), question: decode(qm[2]), answer: decode(qm[3]) };
+        if (qm[4]) q.category = decode(qm[4]);
+        qs.push(q);
+      }
+      sports.push({ id: sid, name: sname, questions: qs });
+      console.log(`보존: ${sname} (${qs.length}문항)`);
+    }
+  } catch (e) {
+    console.warn("기존 oral.ts 보존 처리 실패:", e.message);
+  }
 }
 
 // Sort by name
