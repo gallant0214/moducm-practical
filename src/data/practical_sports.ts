@@ -3627,10 +3627,10 @@ export const practicalSports: PracticalSport[] = [
       },
     ],
   },
-  // 45. 자전거(사이클)
+  // 45. 자전거
   {
     id: "cycling_1",
-    name: "자전거(사이클) 1급",
+    name: "자전거 1급",
     sections: [
       {
         title: "2급 전문·1급 생활 — Roller 주행 (100점)",
@@ -3657,7 +3657,7 @@ export const practicalSports: PracticalSport[] = [
   },
   {
     id: "cycling_2",
-    name: "자전거(사이클) 2급",
+    name: "자전거 2급",
     sections: [
       {
         title: "2급 생활·유소년·노인 — 기능코스 (100점)",
@@ -6039,7 +6039,7 @@ export const practicalSports: PracticalSport[] = [
   },
   {
     id: "cycling_disabled_1",
-    name: "사이클1급[장애인]",
+    name: "자전거1급[장애인]",
     sections: [
       {
         title: "기본",
@@ -6065,7 +6065,7 @@ export const practicalSports: PracticalSport[] = [
   },
   {
     id: "cycling_disabled_2",
-    name: "사이클2급[장애인]",
+    name: "자전거2급[장애인]",
     sections: [
       {
         title: "기본",
