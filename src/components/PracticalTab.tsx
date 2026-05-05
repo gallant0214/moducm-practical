@@ -299,7 +299,7 @@ function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: 
                               <span className="shrink-0 text-[10px] font-bold text-red-500 bg-red-50 px-[6px] py-[2px] rounded mt-[1px]">
                                 감점
                               </span>
-                              <p className="text-[12px] text-red-600 leading-relaxed">
+                              <p className="text-[12px] text-red-600 leading-relaxed whitespace-pre-line">
                                 {item.deduction}
                               </p>
                             </div>
