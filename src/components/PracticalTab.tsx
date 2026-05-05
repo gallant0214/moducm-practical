@@ -170,29 +170,35 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
   );
 }
 
-// 자격별 탭 표시 우선순위 (2급 → 1급 → 그 외)
-function evalSortKey(ev: CertEvaluation): number {
-  for (const c of ev.applies) {
-    if (c === "생활2급" || c === "전문2급" || c === "장애인2급" || c === "생활1·2급" || c === "장애인1·2급") return 0;
-  }
-  for (const c of ev.applies) {
-    if (c === "생활1급" || c === "전문1급" || c === "장애인1급") return 1;
-  }
-  return 2;
-}
+// 자격 정렬 우선순위 (2급 → 1급 → 유소년/노인)
+const CERT_ORDER: Record<string, number> = {
+  "생활2급": 1, "전문2급": 2, "장애인2급": 3, "생활1·2급": 4, "장애인1·2급": 5,
+  "생활1급": 11, "전문1급": 12, "장애인1급": 13,
+  "유소년": 21, "노인": 22,
+};
+function certPriority(c: string): number { return CERT_ORDER[c] ?? 99; }
 
 // 일반 종목 실기 상세 뷰 (카드형 평가항목)
 function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: () => void }) {
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const [evalIdx, setEvalIdx] = useState<number>(0);
+  const [activeCert, setActiveCert] = useState<string | null>(null);
 
-  // 매트릭스 구조면 자격별 탭, 아니면 기존 방식
-  // 2급 항목이 먼저 나오도록 안정 정렬
-  const evaluations: CertEvaluation[] | undefined = sport.evaluations
-    ? [...sport.evaluations].sort((a, b) => evalSortKey(a) - evalSortKey(b))
-    : undefined;
-  const sections: PracticalSection[] = evaluations
-    ? (evaluations[evalIdx]?.sections ?? [])
+  // 자격별 개별 탭으로 평탄화: 한 evaluation의 applies가 여러 자격이면 자격마다 탭 생성
+  type CertTab = { cert: string; sections: PracticalSection[] };
+  const evaluations = sport.evaluations;
+  const certTabs: CertTab[] = evaluations
+    ? evaluations
+        .flatMap((ev) => ev.applies.map((cert) => ({ cert, sections: ev.sections })))
+        .sort((a, b) => certPriority(a.cert) - certPriority(b.cert))
+    : [];
+
+  // 활성 탭 결정
+  const currentCertTab = activeCert
+    ? certTabs.find((t) => t.cert === activeCert) ?? certTabs[0]
+    : certTabs[0];
+
+  const sections: PracticalSection[] = certTabs.length > 0
+    ? (currentCertTab?.sections ?? [])
     : (sport.sections ?? []);
 
   return (
@@ -212,20 +218,20 @@ function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: 
         <span className="text-sm font-bold text-foreground">{sport.name} 실기</span>
       </div>
 
-      {/* 자격별 탭 (매트릭스 구조일 때만) */}
-      {evaluations && evaluations.length > 1 && (
+      {/* 자격별 개별 탭 (자격이 2개 이상일 때만 표시) */}
+      {certTabs.length > 1 && (
         <div className="sticky top-[49px] z-10 bg-background border-b border-divider px-3 py-2 flex gap-2 overflow-x-auto">
-          {evaluations.map((ev, idx) => (
+          {certTabs.map((t) => (
             <button
-              key={idx}
-              onClick={() => { setEvalIdx(idx); setOpenItem(null); }}
+              key={t.cert}
+              onClick={() => { setActiveCert(t.cert); setOpenItem(null); }}
               className={`shrink-0 px-3 py-1.5 text-[12px] font-bold rounded-full whitespace-nowrap transition-colors ${
-                idx === evalIdx
+                t.cert === currentCertTab?.cert
                   ? "bg-primary text-on-primary"
                   : "bg-surface-variant text-text-secondary"
               }`}
             >
-              {ev.applies.join(" / ")}
+              {t.cert}
             </button>
           ))}
         </div>
