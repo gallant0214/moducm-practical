@@ -10,10 +10,36 @@ export interface PracticalSection {
   items: PracticalItem[];
 }
 
+// 자격 매트릭스 키 — 시행공고문에 명시된 자격 종류
+// "전문2급" | "전문1급" | "생활1급" | "생활2급" | "생활1·2급" (1·2급 통합 시행)
+// "유소년" | "노인" | "장애인1급" | "장애인2급" | "장애인1·2급"
+export type CertKey =
+  | "전문2급"
+  | "전문1급"
+  | "생활1급"
+  | "생활2급"
+  | "생활1·2급"
+  | "유소년"
+  | "노인"
+  | "장애인1급"
+  | "장애인2급"
+  | "장애인1·2급";
+
+// 자격별 평가 묶음. 같은 평가를 공유하는 자격들은 한 entry에 묶어 표기.
+// 예: applies=["전문2급","생활1급","생활2급"] sections=[...]
+export interface CertEvaluation {
+  applies: CertKey[];
+  sections: PracticalSection[];
+  oral?: { title: string; description?: string; areas?: { name: string; points?: string; detail?: string }[] };
+}
+
 export interface PracticalSport {
   id: string;
   name: string;
-  sections: PracticalSection[];
+  // 신규: 자격별 매트릭스 (시행공고문 반영)
+  evaluations?: CertEvaluation[];
+  // 레거시: 자격 미구분 단일 평가 (점진 마이그레이션 중)
+  sections?: PracticalSection[];
 }
 
 export const practicalSports: PracticalSport[] = [

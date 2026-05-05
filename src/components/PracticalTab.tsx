@@ -3,7 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { exercises, categories } from "@/data/practical";
-import { practicalSports, type PracticalSport } from "@/data/practical_sports";
+import { practicalSports, type PracticalSport, type CertEvaluation, type PracticalSection } from "@/data/practical_sports";
+
+// 자격별 평가 또는 단일 평가 모두 지원하는 helper
+function totalItemCount(sport: PracticalSport): number {
+  if (sport.sections) return sport.sections.reduce((a, s) => a + s.items.length, 0);
+  if (sport.evaluations) {
+    // 자격마다 평가가 다른 경우 첫 자격 기준으로 표시
+    return sport.evaluations[0]?.sections.reduce((a, s) => a + s.items.length, 0) ?? 0;
+  }
+  return 0;
+}
 
 // 보디빌딩 상세 뷰 (기존 운동 그리드)
 function BodybuildingView({ onBack }: { onBack: () => void }) {
@@ -163,6 +173,13 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
 // 일반 종목 실기 상세 뷰 (카드형 평가항목)
 function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: () => void }) {
   const [openItem, setOpenItem] = useState<string | null>(null);
+  const [evalIdx, setEvalIdx] = useState<number>(0);
+
+  // 매트릭스 구조면 자격별 탭, 아니면 기존 방식
+  const evaluations: CertEvaluation[] | undefined = sport.evaluations;
+  const sections: PracticalSection[] = evaluations
+    ? (evaluations[evalIdx]?.sections ?? [])
+    : (sport.sections ?? []);
 
   return (
     <div className="pb-6">
@@ -181,9 +198,28 @@ function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: 
         <span className="text-sm font-bold text-foreground">{sport.name} 실기</span>
       </div>
 
+      {/* 자격별 탭 (매트릭스 구조일 때만) */}
+      {evaluations && evaluations.length > 1 && (
+        <div className="sticky top-[49px] z-10 bg-background border-b border-divider px-3 py-2 flex gap-2 overflow-x-auto">
+          {evaluations.map((ev, idx) => (
+            <button
+              key={idx}
+              onClick={() => { setEvalIdx(idx); setOpenItem(null); }}
+              className={`shrink-0 px-3 py-1.5 text-[12px] font-bold rounded-full whitespace-nowrap transition-colors ${
+                idx === evalIdx
+                  ? "bg-primary text-on-primary"
+                  : "bg-surface-variant text-text-secondary"
+              }`}
+            >
+              {ev.applies.join(" / ")}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* 섹션별 카드 */}
       <div className="px-3 pt-4 flex flex-col gap-5">
-        {sport.sections.map((section, sIdx) => (
+        {sections.map((section, sIdx) => (
           <div key={sIdx}>
             {/* 섹션 제목 */}
             <div className="flex items-center gap-2 mb-2 px-1">
@@ -342,7 +378,7 @@ export default function PracticalTab() {
               <div className="text-left">
                 <p className="text-[15px] font-bold text-foreground">{sport.name}</p>
                 <p className="text-[11px] text-text-hint mt-[2px]">
-                  {sport.sections.reduce((acc, s) => acc + s.items.length, 0)}개 평가항목
+                  {totalItemCount(sport)}개 평가항목
                 </p>
               </div>
             </div>
