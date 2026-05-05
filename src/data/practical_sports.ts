@@ -11,9 +11,9 @@ export interface PracticalSection {
 }
 
 export type CertKey =
-  | "전문2급" | "전문1급" | "생활1급" | "생활2급" | "생활1·2급"
+  | "전문2급" | "전문1급" | "생활1급" | "생활2급"
   | "유소년" | "노인"
-  | "장애인1급" | "장애인2급" | "장애인1·2급";
+  | "장애인1급" | "장애인2급";
 
 export interface CertEvaluation {
   applies: CertKey[];
