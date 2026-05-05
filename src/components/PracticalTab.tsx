@@ -170,13 +170,27 @@ function BodybuildingView({ onBack }: { onBack: () => void }) {
   );
 }
 
+// 자격별 탭 표시 우선순위 (2급 → 1급 → 그 외)
+function evalSortKey(ev: CertEvaluation): number {
+  for (const c of ev.applies) {
+    if (c === "생활2급" || c === "전문2급" || c === "장애인2급" || c === "생활1·2급" || c === "장애인1·2급") return 0;
+  }
+  for (const c of ev.applies) {
+    if (c === "생활1급" || c === "전문1급" || c === "장애인1급") return 1;
+  }
+  return 2;
+}
+
 // 일반 종목 실기 상세 뷰 (카드형 평가항목)
 function SportPracticalView({ sport, onBack }: { sport: PracticalSport; onBack: () => void }) {
   const [openItem, setOpenItem] = useState<string | null>(null);
   const [evalIdx, setEvalIdx] = useState<number>(0);
 
   // 매트릭스 구조면 자격별 탭, 아니면 기존 방식
-  const evaluations: CertEvaluation[] | undefined = sport.evaluations;
+  // 2급 항목이 먼저 나오도록 안정 정렬
+  const evaluations: CertEvaluation[] | undefined = sport.evaluations
+    ? [...sport.evaluations].sort((a, b) => evalSortKey(a) - evalSortKey(b))
+    : undefined;
   const sections: PracticalSection[] = evaluations
     ? (evaluations[evalIdx]?.sections ?? [])
     : (sport.sections ?? []);
