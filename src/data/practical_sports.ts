@@ -1131,7 +1131,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 (각 영역 20점, 총 100점)",
+                title: "1급 생활 (각 영역 20점, 총 100점)",
                 items: [
                   {
                     label: "패스",
@@ -1170,7 +1170,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 주요 감점 요인",
+                title: "2급 생활 — 주요 감점 요인",
                 items: [
                   {
                     label: "드리블",
@@ -1212,7 +1212,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 주요 감점 요인",
+                title: "2급 전문 — 주요 감점 요인",
                 items: [
                   {
                     label: "드리블",
@@ -1254,7 +1254,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 주요 감점 요인",
+                title: "유소년 — 주요 감점 요인",
                 items: [
                   {
                     label: "드리블",
@@ -1296,7 +1296,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 주요 감점 요인",
+                title: "노인 — 주요 감점 요인",
                 items: [
                   {
                     label: "드리블",
@@ -1441,11 +1441,11 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 전문 — 캐롬",
+                    label: "1급 생활 — 캐롬",
                     detail: "중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션) + 상(밀어치기·리버스·횡단·비껴치기·세워치기)",
                   },
                   {
-                    label: "2급 전문 — 포켓",
+                    label: "1급 생활 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                   {
@@ -1485,19 +1485,19 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 전문 — 캐롬",
+                    label: "2급 생활 — 캐롬",
                     detail: "중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션) + 상(밀어치기·리버스·횡단·비껴치기·세워치기)",
                   },
                   {
-                    label: "2급 전문 — 포켓",
+                    label: "2급 생활 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                   {
-                    label: "1급 생활 — 캐롬",
+                    label: "2급 생활 — 캐롬",
                     detail: "하(밀어치기·끌어치기·비껴치기·앞/옆돌리기) + 중 + 상",
                   },
                   {
-                    label: "1급 생활 — 포켓",
+                    label: "2급 생활 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                 ],
@@ -1529,11 +1529,11 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 캐롬",
+                    label: "1급 생활 — 캐롬",
                     detail: "하(밀어치기·끌어치기·비껴치기·앞/옆돌리기) + 중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션)",
                   },
                   {
-                    label: "2급 생활·유소년·노인 — 포켓",
+                    label: "1급 생활 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                 ],
@@ -1565,11 +1565,11 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 캐롬",
+                    label: "2급 생활 — 캐롬",
                     detail: "하(밀어치기·끌어치기·비껴치기·앞/옆돌리기) + 중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션)",
                   },
                   {
-                    label: "2급 생활·유소년·노인 — 포켓",
+                    label: "2급 생활 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                 ],
@@ -1601,11 +1601,11 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 캐롬",
+                    label: "2급 전문 — 캐롬",
                     detail: "하(밀어치기·끌어치기·비껴치기·앞/옆돌리기) + 중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션)",
                   },
                   {
-                    label: "2급 생활·유소년·노인 — 포켓",
+                    label: "2급 전문 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                 ],
@@ -1637,11 +1637,11 @@ export const practicalSports: PracticalSport[] = [
                 points: "100점",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 캐롬",
+                    label: "유소년 — 캐롬",
                     detail: "하(밀어치기·끌어치기·비껴치기·앞/옆돌리기) + 중(밀어치기 초구·끌어치기 옆/뒤돌리기·비껴치기·더블쿠션)",
                   },
                   {
-                    label: "2급 생활·유소년·노인 — 포켓",
+                    label: "유소년 — 포켓",
                     detail: "끌어치기 3가지·밀어치기 3가지·점프샷 2가지",
                   },
                 ],
@@ -1742,7 +1742,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "실기 평가 방식 (2급전문·1급생활)",
+                title: "실기 평가 방식 (1급 생활)",
                 items: [
                   {
                     label: "파트너 없이 독무, 음악은 주관 측 준비",
@@ -1787,7 +1787,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "실기 평가 방식 (2급생활·유소년·노인)",
+                title: "실기 평가 방식 (2급 생활)",
                 items: [
                   {
                     label: "파트너 없이 독무, 음악은 주관 측 준비",
@@ -1832,7 +1832,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "실기 평가 방식 (2급생활·유소년·노인)",
+                title: "실기 평가 방식 (2급 전문)",
                 items: [
                   {
                     label: "파트너 없이 독무, 음악은 주관 측 준비",
@@ -1877,7 +1877,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "실기 평가 방식 (2급생활·유소년·노인)",
+                title: "실기 평가 방식 (유소년)",
                 items: [
                   {
                     label: "파트너 없이 독무, 음악은 주관 측 준비",
@@ -3301,7 +3301,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 (각 영역 20점, 총 100점)",
+                title: "1급 생활 (각 영역 20점, 총 100점)",
                 items: [
                   {
                     label: "서비스 (20점)",
@@ -3362,7 +3362,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 (총 100점)",
+                title: "2급 생활 (총 100점)",
                 items: [
                   {
                     label: "서비스 (20점)",
@@ -3386,7 +3386,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 (총 100점)",
+                title: "2급 전문 (총 100점)",
                 items: [
                   {
                     label: "서비스 (20점)",
@@ -3410,7 +3410,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 (총 100점)",
+                title: "유소년 (총 100점)",
                 items: [
                   {
                     label: "서비스 (20점)",
@@ -3434,7 +3434,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 (총 100점)",
+                title: "노인 (총 100점)",
                 items: [
                   {
                     label: "서비스 (20점)",
@@ -3939,7 +3939,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 (총 100점)",
+                title: "1급 생활 (총 100점)",
                 items: [
                   {
                     label: "타겟 공략 (30점)",
@@ -3973,7 +3973,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활·유소년·노인 — 경기 시작 단계",
+                title: "2급 생활 — 경기 시작 단계",
                 items: [
                   {
                     label: "그립 (15점)",
@@ -4028,7 +4028,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활·유소년·노인 — 경기 시작 단계",
+                title: "2급 전문 — 경기 시작 단계",
                 items: [
                   {
                     label: "그립 (15점)",
@@ -4083,7 +4083,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활·유소년·노인 — 경기 시작 단계",
+                title: "유소년 — 경기 시작 단계",
                 items: [
                   {
                     label: "그립 (15점)",
@@ -4138,7 +4138,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활·유소년·노인 — 경기 시작 단계",
+                title: "노인 — 경기 시작 단계",
                 items: [
                   {
                     label: "그립 (15점)",
@@ -4263,7 +4263,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 스피드스케이팅",
+                title: "1급 생활 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (30점)",
@@ -4341,7 +4341,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 스피드스케이팅",
+                title: "2급 생활 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (30점)",
@@ -4419,7 +4419,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 스피드스케이팅",
+                title: "1급 생활 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (20점)",
@@ -4475,7 +4475,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 스피드스케이팅",
+                title: "2급 생활 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (20점)",
@@ -4531,7 +4531,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 스피드스케이팅",
+                title: "2급 전문 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (20점)",
@@ -4587,7 +4587,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 스피드스케이팅",
+                title: "유소년 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (20점)",
@@ -4643,7 +4643,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 스피드스케이팅",
+                title: "노인 — 스피드스케이팅",
                 items: [
                   {
                     label: "스타트 (20점)",
@@ -4930,7 +4930,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점) — 스포츠클라이밍",
+                title: "1급 생활 — 실기 (100점) — 스포츠클라이밍",
                 items: [
                   {
                     label: "손 (20점) — 오픈그립 / 언더그립",
@@ -4981,7 +4981,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점) — 스포츠클라이밍",
+                title: "2급 생활 — 실기 (100점) — 스포츠클라이밍",
                 items: [
                   {
                     label: "손 (20점) — 오픈그립 / 언더그립",
@@ -5032,7 +5032,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기",
+                title: "1급 생활 — 실기",
                 items: [
                   {
                     label: "등반 (40점)",
@@ -5081,7 +5081,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "등반 (40점)",
@@ -5130,7 +5130,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기",
+                title: "2급 전문 — 실기",
                 items: [
                   {
                     label: "등반 (40점)",
@@ -5179,7 +5179,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기",
+                title: "유소년 — 실기",
                 items: [
                   {
                     label: "등반 (40점)",
@@ -5228,7 +5228,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기",
+                title: "노인 — 실기",
                 items: [
                   {
                     label: "등반 (40점)",
@@ -5330,7 +5330,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 공격 (40점)",
+                title: "1급 생활 — 공격 (40점)",
                 items: [
                   {
                     label: "타격 (10점)",
@@ -5408,7 +5408,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 공격 (40점)",
+                title: "2급 생활 — 공격 (40점)",
                 items: [
                   {
                     label: "타격 (10점)",
@@ -5486,7 +5486,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "1·2급 생활 — 공격 (40점)",
+                title: "1급 생활 — 공격 (40점)",
                 items: [
                   {
                     label: "타격 (14점)",
@@ -5534,7 +5534,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활 — 공격 (40점)",
+                title: "2급 생활 — 공격 (40점)",
                 items: [
                   {
                     label: "타격 (14점)",
@@ -5582,7 +5582,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활 — 공격 (40점)",
+                title: "2급 전문 — 공격 (40점)",
                 items: [
                   {
                     label: "타격 (14점)",
@@ -5637,7 +5637,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문/1급 생활 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "서비스 (10점)",
@@ -5675,7 +5675,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "서비스 (10점)",
@@ -5713,7 +5713,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "서비스 (10점)",
@@ -5751,7 +5751,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "서비스 (10점)",
@@ -6175,7 +6175,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 경영 스타트·영법 채점",
+                title: "1급 생활 — 경영 스타트·영법 채점",
                 items: [
                   {
                     label: "스타트·영법 (10점)",
@@ -6275,7 +6275,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "출발자세 (10점)",
@@ -6302,7 +6302,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기",
+                title: "2급 전문 — 실기",
                 items: [
                   {
                     label: "출발자세 (10점)",
@@ -6329,7 +6329,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기",
+                title: "유소년 — 실기",
                 items: [
                   {
                     label: "출발자세 (10점)",
@@ -6356,7 +6356,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기",
+                title: "노인 — 실기",
                 items: [
                   {
                     label: "출발자세 (10점)",
@@ -6449,7 +6449,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "핀수영·프리다이빙 — 2급 전문 기본기술 (50점)",
+                title: "핀수영·프리다이빙 — 1급 생활 기본기술 (50점)",
                 items: [
                   {
                     label: "기초기능 표면 핀수영 100M (10점)",
@@ -6555,7 +6555,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "스킨스쿠버 — 2급 전문·2급 생활·유소년·노인 실기",
+                title: "스킨스쿠버 — 2급 생활 실기",
                 items: [
                   {
                     label: "수영 200m (10점)",
@@ -6600,7 +6600,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "스킨스쿠버 — 2급 전문·2급 생활·유소년·노인 실기",
+                title: "스킨스쿠버 — 2급 전문 실기",
                 items: [
                   {
                     label: "수영 200m (10점)",
@@ -6645,7 +6645,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "스킨스쿠버 — 2급 전문·2급 생활·유소년·노인 실기",
+                title: "스킨스쿠버 — 유소년 실기",
                 items: [
                   {
                     label: "수영 200m (10점)",
@@ -6690,7 +6690,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "스킨스쿠버 — 2급 전문·2급 생활·유소년·노인 실기",
+                title: "스킨스쿠버 — 노인 실기",
                 items: [
                   {
                     label: "수영 200m (10점)",
@@ -6742,7 +6742,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점, 10개 영역 각 10점)",
+                title: "1급 생활 — 실기 (100점, 10개 영역 각 10점)",
                 items: [
                   {
                     label: "드라이브 백핸드",
@@ -6826,7 +6826,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "기본 (30점)",
@@ -6852,7 +6852,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "기본 (30점)",
@@ -6878,7 +6878,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "기본 (30점)",
@@ -6904,7 +6904,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "기본 (30점)",
@@ -6937,7 +6937,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "1급 생활 — 실기",
                 items: [
                   {
                     label: "마장마술 또는 장애물",
@@ -6973,7 +6973,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "마장마술 또는 장애물",
@@ -7009,7 +7009,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 종합평가",
+                title: "1급 생활 — 종합평가",
                 items: [
                   {
                     label: "기승 자세",
@@ -7126,7 +7126,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 종합평가",
+                title: "2급 생활 — 종합평가",
                 items: [
                   {
                     label: "기승 자세",
@@ -7243,7 +7243,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 종합평가",
+                title: "2급 전문 — 종합평가",
                 items: [
                   {
                     label: "기승 자세",
@@ -7360,7 +7360,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 종합평가",
+                title: "유소년 — 종합평가",
                 items: [
                   {
                     label: "기승 자세",
@@ -7477,7 +7477,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 종합평가",
+                title: "노인 — 종합평가",
                 items: [
                   {
                     label: "기승 자세",
@@ -7595,7 +7595,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["장애인1급"],
         sections: [
               {
-                title: "마장마술 실기 (1급/2급 동일 경로, 1급 윤승 15m·15m + 4만곡 / 2급 윤승 12m·15m + 4만곡)",
+                title: "마장마술 실기 (1급 장애인)",
                 points: "100점",
                 items: [
                   { label: "1. A-X 보통속보 입장, 정지·부동·경례 (5점)", detail: "속보의 수준 입장, 진직성, 정지와 이행" },
@@ -7625,7 +7625,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["장애인2급"],
         sections: [
               {
-                title: "마장마술 실기 (1급/2급 동일 경로, 1급 윤승 15m·15m + 4만곡 / 2급 윤승 12m·15m + 4만곡)",
+                title: "마장마술 실기 (2급 장애인)",
                 points: "100점",
                 items: [
                   { label: "1. A-X 보통속보 입장, 정지·부동·경례 (5점)", detail: "속보의 수준 입장, 진직성, 정지와 이행" },
@@ -8952,7 +8952,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "1급 생활 — 실기",
                 items: [
                   {
                     label: "AMP (10점)",
@@ -9013,7 +9013,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "AMP (10점)",
@@ -9074,7 +9074,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기",
+                title: "1급 생활 — 실기",
                 items: [
                   {
                     label: "기본 스텝 (10점)",
@@ -9113,7 +9113,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "기본 스텝 (10점)",
@@ -9152,7 +9152,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기",
+                title: "2급 전문 — 실기",
                 items: [
                   {
                     label: "기본 스텝 (10점)",
@@ -9191,7 +9191,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기",
+                title: "유소년 — 실기",
                 items: [
                   {
                     label: "기본 스텝 (10점)",
@@ -9230,7 +9230,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기",
+                title: "노인 — 실기",
                 items: [
                   {
                     label: "기본 스텝 (10점)",
@@ -9362,7 +9362,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 기술분류",
+                title: "1급 생활 — 기술분류",
                 items: [
                   {
                     label: "바벨 잡는 방법",
@@ -9448,7 +9448,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 기술분류",
+                title: "2급 생활 — 기술분류",
                 items: [
                   {
                     label: "바벨 잡는 방법",
@@ -9534,7 +9534,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 전문 — 기술분류",
+                title: "유소년 — 기술분류",
                 items: [
                   {
                     label: "바벨 잡는 방법",
@@ -9620,7 +9620,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 전문 — 기술분류",
+                title: "노인 — 기술분류",
                 items: [
                   {
                     label: "바벨 잡는 방법",
@@ -9763,7 +9763,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 기술분류",
+                title: "유소년 — 기술분류",
                 items: [
                   {
                     label: "경기방법",
@@ -10220,7 +10220,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "실기 — 산타 (2급 전문, 50점)",
+                title: "실기 — 산타 (1급 생활)",
                 items: [
                   {
                     label: "스텝 (10점)",
@@ -10284,7 +10284,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "실기 — 산타 (2급 전문, 50점)",
+                title: "실기 — 산타 (2급 생활)",
                 items: [
                   {
                     label: "스텝 (10점)",
@@ -10348,7 +10348,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "실기 — 태극권 24식 (2급 생활·유소년·노인, 50점)",
+                title: "실기 — 태극권 24식 (1급 생활)",
                 items: [
                   {
                     label: "퇴법 (5점)",
@@ -10416,7 +10416,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "실기 — 태극권 24식 (2급 생활·유소년·노인, 50점)",
+                title: "실기 — 태극권 24식 (2급 생활)",
                 items: [
                   {
                     label: "퇴법 (5점)",
@@ -10484,7 +10484,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "실기 — 태극권 24식 (2급 생활·유소년·노인, 50점)",
+                title: "실기 — 태극권 24식 (2급 전문)",
                 items: [
                   {
                     label: "퇴법 (5점)",
@@ -10552,7 +10552,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "실기 — 태극권 24식 (2급 생활·유소년·노인, 50점)",
+                title: "실기 — 태극권 24식 (유소년)",
                 items: [
                   {
                     label: "퇴법 (5점)",
@@ -10620,7 +10620,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "실기 — 태극권 24식 (2급 생활·유소년·노인, 50점)",
+                title: "실기 — 태극권 24식 (노인)",
                 items: [
                   {
                     label: "퇴법 (5점)",
@@ -11767,7 +11767,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "서브 (20점)",
@@ -11791,7 +11791,7 @@ export const practicalSports: PracticalSport[] = [
                   },
                   {
                     label: "공격 — 서서차기 (20점)",
-                    detail: "2급 생활·유소년·노인: 서서차기만 평가 / 볼을 정확하게 타격하여 상대 코트에 강하게 / 볼의 위치에 맞게 자세가 정확하게 수행",
+                    detail: "유소년: 서서차기만 평가 / 볼을 정확하게 타격하여 상대 코트에 강하게 / 볼의 위치에 맞게 자세가 정확하게 수행",
                   },
                 ],
               },
@@ -11801,7 +11801,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활·유소년·노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "서브 (20점)",
@@ -11825,7 +11825,7 @@ export const practicalSports: PracticalSport[] = [
                   },
                   {
                     label: "공격 — 서서차기 (20점)",
-                    detail: "2급 생활·유소년·노인: 서서차기만 평가 / 볼을 정확하게 타격하여 상대 코트에 강하게 / 볼의 위치에 맞게 자세가 정확하게 수행",
+                    detail: "노인: 서서차기만 평가 / 볼을 정확하게 타격하여 상대 코트에 강하게 / 볼의 위치에 맞게 자세가 정확하게 수행",
                   },
                 ],
               },
@@ -12033,7 +12033,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활·유소년 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "기본스텝 (20점)",
@@ -12061,7 +12061,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활·유소년 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "기본스텝 (20점)",
@@ -12096,7 +12096,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "기계체조 — 2급 전문",
+                title: "기계체조 — 1급 생활",
                 items: [
                   {
                     label: "마루운동",
@@ -12178,7 +12178,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "기계체조 — 2급 생활·유소년·노인",
+                title: "기계체조 — 2급 생활",
                 items: [
                   {
                     label: "도움닫기",
@@ -12274,7 +12274,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "기계체조 — 2급 생활·유소년·노인",
+                title: "기계체조 — 2급 전문",
                 items: [
                   {
                     label: "도움닫기",
@@ -12370,7 +12370,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "기계체조 — 2급 생활·유소년·노인",
+                title: "기계체조 — 유소년",
                 items: [
                   {
                     label: "도움닫기",
@@ -12466,7 +12466,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "기계체조 — 2급 생활·유소년·노인",
+                title: "기계체조 — 노인",
                 items: [
                   {
                     label: "도움닫기",
@@ -12569,7 +12569,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (25점)",
@@ -12607,7 +12607,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (25점)",
@@ -12635,7 +12635,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (25점)",
@@ -12663,7 +12663,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (25점)",
@@ -12691,7 +12691,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (25점)",
@@ -12785,7 +12785,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "기본 실기",
@@ -13025,7 +13025,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "1급 생활 — 실기",
                 items: [
                   {
                     label: "딜리버리 — 셋업자세",
@@ -13076,7 +13076,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "2급 생활 — 실기",
                 items: [
                   {
                     label: "딜리버리 — 셋업자세",
@@ -13127,7 +13127,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "유소년 — 실기",
                 items: [
                   {
                     label: "딜리버리 — 셋업자세",
@@ -13178,7 +13178,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 전문 — 실기",
+                title: "노인 — 실기",
                 items: [
                   {
                     label: "딜리버리 — 셋업자세",
@@ -13384,7 +13384,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문/1급 생활 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "풋워크 (7점)",
@@ -13426,7 +13426,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "스트로크 (14점)",
@@ -13472,7 +13472,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "스트로크 (14점)",
@@ -13518,7 +13518,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "스트로크 (14점)",
@@ -13564,7 +13564,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "스트로크 (14점)",
@@ -13702,7 +13702,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문/1급 생활 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (10점)",
@@ -13749,7 +13749,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문/1급 생활 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (10점)",
@@ -13796,7 +13796,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (20점)",
@@ -13822,7 +13822,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (20점)",
@@ -13848,7 +13848,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (20점)",
@@ -13874,7 +13874,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (20점)",
@@ -13900,7 +13900,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "앞엣거리 (20점)",
@@ -13933,7 +13933,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점, 10개 영역 각 10점)",
+                title: "1급 생활 — 실기 (100점, 10개 영역 각 10점)",
                 items: [
                   {
                     label: "서브 (10점)",
@@ -14005,7 +14005,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "서브앤드발리 (20점)",
@@ -14035,7 +14035,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "서브앤드발리 (20점)",
@@ -14065,7 +14065,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "서브앤드발리 (20점)",
@@ -14174,7 +14174,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문/1급 생활 — 실기 (연속 수행)",
+                title: "1급 생활 — 실기 (연속 수행)",
                 items: [
                   {
                     label: "기록 (30점)",
@@ -14208,7 +14208,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (각 종목 별도 기록)",
+                title: "유소년 — 실기 (각 종목 별도 기록)",
                 items: [
                   {
                     label: "수영 완영 100m (20점)",
@@ -14234,7 +14234,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (각 종목 별도 기록)",
+                title: "노인 — 실기 (각 종목 별도 기록)",
                 items: [
                   {
                     label: "수영 완영 100m (20점)",
@@ -14354,7 +14354,7 @@ export const practicalSports: PracticalSport[] = [
                 title: "실기평가",
                 items: [
                   {
-                    label: "1급 생활 — 경기기술 (100점)",
+                    label: "2급 생활 — 경기기술 (100점)",
                     detail: "18홀 라운드 평가\n57타 이하 합격 / 실기검정 지정한 골프장 로컬룰 적용 / 4인(3인) 1팀 18홀 스트로크 플레이",
                     deduction: "거리측정기 사용 불가 / 악천후 시 검정 당일 결정으로 중단 후 익일 진행\n대한파크골프협회 공인 경기용구(클럽·공) 기준에 적합한 용구 사용 의무",
                   },
@@ -14382,7 +14382,7 @@ export const practicalSports: PracticalSport[] = [
                 title: "실기평가",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 경기기술 (100점)",
+                    label: "1급 생활 — 경기기술 (100점)",
                     detail: "18홀 라운드 평가\n60타 이하 합격 / 실기검정 지정한 골프장 로컬룰 적용 / 4인(3인) 1팀 18홀 스트로크 플레이",
                     deduction: "거리측정기 사용 불가 / 악천후 시 검정 당일 결정으로 중단 후 익일 진행\n대한파크골프협회 공인 경기용구(클럽·공) 기준에 적합한 용구 사용 의무",
                   },
@@ -14410,7 +14410,7 @@ export const practicalSports: PracticalSport[] = [
                 title: "실기평가",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 경기기술 (100점)",
+                    label: "2급 생활 — 경기기술 (100점)",
                     detail: "18홀 라운드 평가\n60타 이하 합격 / 실기검정 지정한 골프장 로컬룰 적용 / 4인(3인) 1팀 18홀 스트로크 플레이",
                     deduction: "거리측정기 사용 불가 / 악천후 시 검정 당일 결정으로 중단 후 익일 진행\n대한파크골프협회 공인 경기용구(클럽·공) 기준에 적합한 용구 사용 의무",
                   },
@@ -14438,7 +14438,7 @@ export const practicalSports: PracticalSport[] = [
                 title: "실기평가",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 경기기술 (100점)",
+                    label: "유소년 — 경기기술 (100점)",
                     detail: "18홀 라운드 평가\n60타 이하 합격 / 실기검정 지정한 골프장 로컬룰 적용 / 4인(3인) 1팀 18홀 스트로크 플레이",
                     deduction: "거리측정기 사용 불가 / 악천후 시 검정 당일 결정으로 중단 후 익일 진행\n대한파크골프협회 공인 경기용구(클럽·공) 기준에 적합한 용구 사용 의무",
                   },
@@ -14466,7 +14466,7 @@ export const practicalSports: PracticalSport[] = [
                 title: "실기평가",
                 items: [
                   {
-                    label: "2급 생활·유소년·노인 — 경기기술 (100점)",
+                    label: "노인 — 경기기술 (100점)",
                     detail: "18홀 라운드 평가\n60타 이하 합격 / 실기검정 지정한 골프장 로컬룰 적용 / 4인(3인) 1팀 18홀 스트로크 플레이",
                     deduction: "거리측정기 사용 불가 / 악천후 시 검정 당일 결정으로 중단 후 익일 진행\n대한파크골프협회 공인 경기용구(클럽·공) 기준에 적합한 용구 사용 의무",
                   },
@@ -14647,7 +14647,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (기초10 + 공격30 + 수비30 + 역공격30 = 100점)",
+                title: "1급 생활 — 실기 (기초10 + 공격30 + 수비30 + 역공격30 = 100점)",
                 items: [
                   {
                     label: "기초기술 (10점)",
@@ -14695,7 +14695,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (각 25점, 총 100점)",
+                title: "2급 생활 — 실기 (각 25점, 총 100점)",
                 items: [
                   {
                     label: "기초기술 (25점)",
@@ -14721,7 +14721,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (각 25점, 총 100점)",
+                title: "2급 전문 — 실기 (각 25점, 총 100점)",
                 items: [
                   {
                     label: "기초기술 (25점)",
@@ -14747,7 +14747,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (각 25점, 총 100점)",
+                title: "유소년 — 실기 (각 25점, 총 100점)",
                 items: [
                   {
                     label: "기초기술 (25점)",
@@ -14773,7 +14773,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "1·2급 생활/유소년/노인 — 실기 (각 25점, 총 100점)",
+                title: "노인 — 실기 (각 25점, 총 100점)",
                 items: [
                   {
                     label: "기초기술 (25점)",
@@ -14892,7 +14892,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (10점)",
@@ -14937,7 +14937,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (10점)",
@@ -14982,7 +14982,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "2급 생활/유소년/노인 — 실기 (100점)",
+                title: "노인 — 실기 (100점)",
                 items: [
                   {
                     label: "리프팅 (10점)",
@@ -15034,7 +15034,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "유소년 — 얼티밋 (40점)",
+                title: "1급 생활 — 얼티밋 (40점)",
                 items: [
                   {
                     label: "제자리 직선 던지기 (백핸드·포핸드 각 1회)",
@@ -15103,7 +15103,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "유소년 — 얼티밋 (40점)",
+                title: "2급 생활 — 얼티밋 (40점)",
                 items: [
                   {
                     label: "제자리 직선 던지기 (백핸드·포핸드 각 1회)",
@@ -15241,7 +15241,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "유소년 — 얼티밋 (40점)",
+                title: "노인 — 얼티밋 (40점)",
                 items: [
                   {
                     label: "제자리 직선 던지기 (백핸드·포핸드 각 1회)",
@@ -15366,7 +15366,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "볼 리프팅 (20점)",
@@ -15402,7 +15402,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "2급 생활/유소년 — 실기 (100점)",
+                title: "유소년 — 실기 (100점)",
                 items: [
                   {
                     label: "볼 리프팅 (20점)",
@@ -15674,7 +15674,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인 공통)",
+                title: "실기평가 (1급 생활)",
                 items: [
                   {
                     label: "단전호흡 (15점)",
@@ -15717,7 +15717,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인 공통)",
+                title: "실기평가 (2급 생활)",
                 items: [
                   {
                     label: "단전호흡 (15점)",
@@ -15760,7 +15760,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인 공통)",
+                title: "실기평가 (유소년)",
                 items: [
                   {
                     label: "단전호흡 (15점)",
@@ -15803,7 +15803,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["노인"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인 공통)",
+                title: "실기평가 (노인)",
                 items: [
                   {
                     label: "단전호흡 (15점)",
@@ -15857,7 +15857,7 @@ export const practicalSports: PracticalSport[] = [
                 items: [
                   {
                     label: "캐치/스텝 (20점)",
-                    detail: "2급전문·1급·2급생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
+                    detail: "2급 전문·1급·2급 전문: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·2급 전문: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
                   },
                   {
                     label: "드리블/패스 (30점)",
@@ -15896,7 +15896,7 @@ export const practicalSports: PracticalSport[] = [
                 items: [
                   {
                     label: "캐치/스텝 (20점)",
-                    detail: "2급전문·1급·2급생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
+                    detail: "1급 생활·1급·1급 생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·1급 생활: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
                   },
                   {
                     label: "드리블/패스 (30점)",
@@ -15935,7 +15935,7 @@ export const practicalSports: PracticalSport[] = [
                 items: [
                   {
                     label: "캐치/스텝 (20점)",
-                    detail: "2급전문·1급·2급생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
+                    detail: "2급 생활·1급·2급 생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·2급 생활: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
                   },
                   {
                     label: "드리블/패스 (30점)",
@@ -15974,7 +15974,7 @@ export const practicalSports: PracticalSport[] = [
                 items: [
                   {
                     label: "캐치/스텝 (20점)",
-                    detail: "2급전문·1급·2급생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
+                    detail: "유소년·1급·유소년: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
                   },
                   {
                     label: "드리블/패스 (30점)",
@@ -16013,7 +16013,7 @@ export const practicalSports: PracticalSport[] = [
                 items: [
                   {
                     label: "캐치/스텝 (20점)",
-                    detail: "2급전문·1급·2급생활: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
+                    detail: "노인·1급·노인: 패스 캐치 → 노스텝 착지 → 1,2,3스텝 + 페인트로 슈팅 공간 확보\n유소년·노인: 달리는 상태에서 볼 캐치 → 노스텝 등 → 1,2,3스텝 선택\n볼 잡는 자세·안정성, 연결 동작 유연함, 스텝 정확성",
                   },
                   {
                     label: "드리블/패스 (30점)",
@@ -16055,7 +16055,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인)",
+                title: "실기평가 (1급 생활)",
                 items: [
                   {
                     label: "비행계획 (20점)",
@@ -16094,7 +16094,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인)",
+                title: "실기평가 (2급 생활)",
                 items: [
                   {
                     label: "비행계획 (20점)",
@@ -16133,7 +16133,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["유소년"],
         sections: [
               {
-                title: "실기평가 (1·2급 생활/유소년/노인)",
+                title: "실기평가 (유소년)",
                 items: [
                   {
                     label: "비행계획 (20점)",
@@ -16179,7 +16179,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "힙합동작 표현 (20점)",
@@ -16223,7 +16223,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "2급 전문 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "힙합동작 표현 (20점)",
@@ -16267,7 +16267,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활1급"],
         sections: [
               {
-                title: "1·2급 생활 — 실기 (100점)",
+                title: "1급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "기초 동작 (10점)",
@@ -16293,7 +16293,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["생활2급"],
         sections: [
               {
-                title: "1·2급 생활 — 실기 (100점)",
+                title: "2급 생활 — 실기 (100점)",
                 items: [
                   {
                     label: "기초 동작 (10점)",
@@ -16319,7 +16319,7 @@ export const practicalSports: PracticalSport[] = [
         applies: ["전문2급"],
         sections: [
               {
-                title: "1·2급 생활 — 실기 (100점)",
+                title: "2급 전문 — 실기 (100점)",
                 items: [
                   {
                     label: "기초 동작 (10점)",
