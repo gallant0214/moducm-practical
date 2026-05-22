@@ -47,3 +47,4 @@ next-env.d.ts
 
 # 2026 reference PDFs (시행공고문)
 /downloads_2026/
+.env*.local
